@@ -1,35 +1,36 @@
 # AvvaMobile.Core
-.Net ile geliştrilen tüm backend projelerimizde kullanılmak üzere hazırlanan sınıfları içerir.
+This package includes most of common and needed core classes and ready use for .Net projects.
 
 # SMS Sender
-SMS gönderimi için kullanılır. En popüler SMS gönderim şirketlerinin entegrasyonlarını içerir.
+Helps to send SMS to users with already integrated companies.
 
-**Kullanım Şekli**
-İlk olarak gönderim için kullanılan bilgiler appsettings.json içerisinde aşağıdaki bilgiler ile yazılmalıdır.
+**How To**
+First, you will need to setup account information in the appsettings.json file.
 
     "SMSSender": {
 	    "Username": "5312345678",
-	    "Password": "OrnekParola",
+	    "Password": "SampePassword",
 	    "Sender": "SenderNameGoesHere"
     }
 
-Daha sonra Startup.cs içerisindeki ConfigureServices içerisinde Dependency Injection kurulumu yapılmalıdır.
+Then you need to add to DI service with instance type.
 
     services.AddScoped<ISMSSender, IletiMerkezi>();
 
- Daha sonra kullanılacak yerde instance erişimi sağlanır.
+It's ready now and you can start using in contructor.
 
     private readonly ISMSSender _smsSender;
     public BusinessClass (ISMSSender smsSender)
     {
 	    _smsSender = smsSender;
     }
-Son olarak gönderim işlemi yapılır.
 
-    var smsSentResult = _smsService.Send("5312345678", "Bu bir deneme mesajıdır.");
+Finally send the SMS.
 
-## Kullanılabilir SMS gönderim Şirketleri
+    var smsSentResult = _smsService.Send("5312345678", "This is a test message.");
 
-Firma | Web Site | Type
+## Integration Ready Companies
+
+Company | Web Site | Type
 --- | --- | --- 
 İleti Merkezi | https://www.iletimerkezi.com | IletiMerkezi
