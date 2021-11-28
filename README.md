@@ -22,13 +22,14 @@ Daha sonra Startup.cs içerisindeki ConfigureServices içerisinde Dependency Inj
     private readonly ISMSSender _smsSender;
     public BusinessClass (ISMSSender smsSender)
     {
-	    _smsSender= smsSender;
+	    _smsSender = smsSender;
     }
 Son olarak gönderim işlemi yapılır.
 
-    var smsSentResult= _smsService.Send("5312345678", "Bu bir deneme mesajıdır.");
+    var smsSentResult = _smsService.Send("5312345678", "Bu bir deneme mesajıdır.");
 
-Kullanılabilir SMS gönderim şirketleri:
-| Firma | Web Site | Class Adı |
-|--|--|
-| İleti Merkezi | https://www.iletimerkezi.com | IletiMerkezi |
+## Kullanılabilir SMS gönderim Şirketleri
+
+Firma | Web Site | Type
+--- | --- | --- 
+İleti Merkezi | https://www.iletimerkezi.com | IletiMerkezi
