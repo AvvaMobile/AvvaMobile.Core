@@ -93,7 +93,7 @@ namespace AvvaMobile.Core.Extensions
         {
             if (!val.HasValue)
             {
-                return string.Empty
+                return string.Empty;
             }
 
             return ToFormattedPercentage(val.Value);
