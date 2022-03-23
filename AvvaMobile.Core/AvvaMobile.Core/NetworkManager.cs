@@ -84,7 +84,7 @@ namespace AvvaMobile.Core
                     }
                 }
 
-                response.Data = await client.GetStringAsync(uri);
+                response.Data = await client.GetStringAsync(client.BaseAddress + uri);
             }
             catch (HttpRequestException ex)
             {
@@ -110,7 +110,7 @@ namespace AvvaMobile.Core
                 var json = JsonConvert.SerializeObject(data);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var resp = await client.PostAsync(uri, content);
+                var resp = await client.PostAsync(client.BaseAddress + uri, content);
                 response.Data = await resp.Content.ReadAsStringAsync();
                 response.IsSuccess = resp.IsSuccessStatusCode;
             }
@@ -135,7 +135,7 @@ namespace AvvaMobile.Core
 
             try
             {
-                var resp = await client.DeleteAsync(uri);
+                var resp = await client.DeleteAsync(client.BaseAddress + uri);
                 response.Data = await resp.Content.ReadAsStringAsync();
                 response.IsSuccess = resp.IsSuccessStatusCode;
             }
