@@ -135,7 +135,7 @@ namespace AvvaMobile.Core
 
             try
             {
-                var resp = await client.DeleteAsync(client.BaseAddress + uri);
+                var resp = await client.DeleteAsync(uri);
                 response.Data = await resp.Content.ReadAsStringAsync();
                 response.IsSuccess = resp.IsSuccessStatusCode;
             }
