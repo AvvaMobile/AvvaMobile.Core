@@ -72,15 +72,13 @@ namespace AvvaMobile.Core.Extensions
                 return str;
             }
 
-            // Clear special characters
             str = Regex.Replace(str, "[^0-9]+", string.Empty);
-
-            if (str.Length.Equals("11")) // Detect if it started with 0 and no country code.
+            if (str.Length.Equals(11))
             {
                 str = str.TrimStart('0');
-            }            
+            }
 
-            if (str.Length.Equals("10")) // Detect if it entered without country code.
+            if (str.Length.Equals(10))
             {
                 str = "90" + str;
             }
