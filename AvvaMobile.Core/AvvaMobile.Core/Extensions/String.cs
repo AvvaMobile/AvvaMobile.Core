@@ -42,15 +42,11 @@ namespace AvvaMobile.Core.Extensions
             {
                 return string.Empty;
             }
-            else if (str.Length == 7)
-            {
-                return Regex.Replace(str, @"^\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*$", "$1$2$3 $4 $5$6$7");
-            }
             else if (str.Length == 10)
             {
-                return Regex.Replace(str, @"^\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*$", "0($1$2$3) $4$5$6 $7$8 $9$10");
+                return Regex.Replace(str, @"^\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*$", "0 ($1$2$3) $4$5$6 $7$8 $9$10");
             }
-            else if (str.Length == 10)
+            else if (str.Length == 11)
             {
                 return Regex.Replace(str, @"^\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*$", "$1 ($2$3$4) $5$6$7 $8$9 $10$11");
             }
@@ -64,12 +60,7 @@ namespace AvvaMobile.Core.Extensions
             }
         }
 
-        public static string ClearHTMLTags(this string str)
-        {
-            return string.IsNullOrEmpty(str) ? str : Regex.Replace(str, "<.*?>", " ");
-        }
-
-        public static string ClearPhoneNumber(this string str)
+        public static string ClearPhoneNumber_LeadingCountrCode(this string str)
         {
             if (string.IsNullOrEmpty(str))
             {
@@ -77,17 +68,65 @@ namespace AvvaMobile.Core.Extensions
             }
 
             str = Regex.Replace(str, "[^0-9]+", string.Empty);
-            if (str.Length.Equals(11))
-            {
-                str = str.TrimStart('0');
-            }
 
-            if (str.Length.Equals(10))
+            if (str.Length.Equals(10)) // 10 = '532 111 22 33'
             {
                 str = "90" + str;
             }
+            else if (str.Length.Equals(11)) // 11 = '0 532 111 22 33'
+            {
+                str = "9" + str;
+            }
 
             return str;
+        }
+
+        public static string ClearPhoneNumber_LeadingZero(this string str)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return str;
+            }
+
+            str = Regex.Replace(str, "[^0-9]+", string.Empty);
+
+            if (str.Length.Equals(10)) // 10 = '532 111 22 33'
+            {
+                str = "0" + str;
+            }
+            else if (str.Length.Equals(12)) // 12 = '90 532 111 22 33'
+            {
+                str = str.TrimStart('9');
+            }
+
+            return str;
+        }
+
+        public static string ClearPhoneNumber_NoLeadingNumber(this string str)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return str;
+            }
+
+            str = Regex.Replace(str, "[^0-9]+", string.Empty);
+
+            if (str.Length.Equals(11)) // 11 = '0 532 111 22 33'
+            {
+                str = str.TrimStart('0');
+            }
+            else if (str.Length.Equals(12)) // 12 = '90 532 111 22 33'
+            {
+                str = str.TrimStart('9');
+                str = str.TrimStart('0');
+            }
+
+            return str;
+        }
+
+        public static string ClearHTMLTags(this string str)
+        {
+            return string.IsNullOrEmpty(str) ? str : Regex.Replace(str, "<.*?>", " ");
         }
 
         private const string Dash = "-";
