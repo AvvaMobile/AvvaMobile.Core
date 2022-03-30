@@ -50,6 +50,10 @@ namespace AvvaMobile.Core.Extensions
             {
                 return Regex.Replace(str, @"^\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*$", "0($1$2$3) $4$5$6 $7$8 $9$10");
             }
+            else if (str.Length == 10)
+            {
+                return Regex.Replace(str, @"^\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*$", "$1 ($2$3$4) $5$6$7 $8$9 $10$11");
+            }
             else if (str.Length == 12)
             {
                 return Regex.Replace(str, @"^\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*$", "+$1$2 ($3$4$5) $6$7$8 $9$10 $11$12");
