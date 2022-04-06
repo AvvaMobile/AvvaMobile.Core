@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace AvvaMobile.Core.Extensions
 {
@@ -33,6 +34,19 @@ namespace AvvaMobile.Core.Extensions
         {
             var diff = (7 + (datetime.DayOfWeek - DayOfWeek.Monday)) % 7;
             return datetime.AddDays(-1 * diff).Date;
+        }
+
+        public static (DateTime, DateTime) DataTableDateTime(this string date)
+        {
+            var dateRange = date.ToStringData().Split("-");
+            if (dateRange.Length == 2)
+            {
+                DateTime FilterStartDate = DateTime.ParseExact(dateRange[0].Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                DateTime FilterEndDate = DateTime.ParseExact(dateRange[1].Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                FilterEndDate = FilterEndDate.AddHours(23).AddMinutes(59);
+                return (FilterStartDate, FilterEndDate);
+            }
+            return (DateTime.MinValue, DateTime.MaxValue);
         }
     }
 }
