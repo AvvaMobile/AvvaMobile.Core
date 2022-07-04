@@ -124,6 +124,30 @@ namespace AvvaMobile.Core
         }
 
         /// <summary>
+        /// Sends a POST request with form data. Also returns http response as String value.
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="content"></param>
+        /// <returns></returns>
+        public async Task<HttpResponse> PostAsFormDataAsync(string uri, MultipartFormDataContent content)
+        {
+            var response = new HttpResponse();
+            try
+            {
+                var resp = await client.PostAsync(client.BaseAddress + uri, content);
+                response.Data = await resp.Content.ReadAsStringAsync();
+                response.IsSuccess = resp.IsSuccessStatusCode;
+            }
+            catch (HttpRequestException ex)
+            {
+                response.IsSuccess = false;
+                response.Message = "HttpClient.PostAsync Error: " + ex.Message;
+            }
+
+            return response;
+        }
+
+        /// <summary>
         /// Sends a DELETE request with data object. Also returns http response as String value.
         /// </summary>
         /// <param name="uri"></param>
