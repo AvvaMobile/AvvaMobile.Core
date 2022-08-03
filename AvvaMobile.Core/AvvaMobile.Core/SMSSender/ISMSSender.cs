@@ -8,6 +8,6 @@
     public class SMSSentResult
     {
         public bool IsSuccess { get; set; } = true;
-        public Exception? Exception { get; set; }
+        public Exception Exception { get; set; }
     }
 }

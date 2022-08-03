@@ -7,7 +7,7 @@ namespace AvvaMobile.Core
 {
     public class BaseController : Controller
     {
-        public void Message(ServiceResponse response)
+        public void Message(ServiceResult response)
         {
             if (response.Message.IsNotNull())
             {

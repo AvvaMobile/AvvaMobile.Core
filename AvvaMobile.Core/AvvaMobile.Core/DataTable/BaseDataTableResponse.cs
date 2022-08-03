@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AvvaMobile.Core.DataTable
 {
-    public class BaseDataTableResponse : ServiceResponse
+    public class BaseDataTableResponse : ServiceResult
     {
         public int RecordsFiltered { get; set; }
         public int RecordsTotal { get; set; }
