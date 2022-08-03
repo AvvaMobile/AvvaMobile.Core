@@ -10,7 +10,7 @@
             IsSuccess = false;
             Message = message;
         }
-        public void SetSuccess(string message)
+        public void SetSuccess(string message = "")
         {
             IsSuccess = true;
             Message = message;
