@@ -13,9 +13,9 @@
     <RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
     <RunAnalyzersDuringLiveAnalysis>False</RunAnalyzersDuringLiveAnalysis>
     <EnableNETAnalyzers>False</EnableNETAnalyzers>
-    <AssemblyVersion>1.0.24</AssemblyVersion>
-    <FileVersion>1.0.24</FileVersion>
-    <Version>1.0.24</Version>
+    <AssemblyVersion>1.0.25</AssemblyVersion>
+    <FileVersion>1.0.25</FileVersion>
+    <Version>1.0.25</Version>
     <PackageIcon>avvamobile.png</PackageIcon>
     <Description>This package is build for Avva Mobile developers to make their solutions easy to develop.</Description>
     <Copyright>Avva Mobile Enterprise Solutions</Copyright>
