@@ -59,7 +59,27 @@ namespace AvvaMobile.Core.Extensions
                 return str;
             }
         }
+        public static string ClearPhoneNumber(this string str)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return str;
+            }
 
+            str = Regex.Replace(str, "[^0-9]+", string.Empty);
+
+            if (str.Length.Equals(10)) // 10 = '532 111 22 33'
+            {
+                str = "90" + str;
+            }
+            else if (str.Length.Equals(11)) // 11 = '0 532 111 22 33'
+            {
+                str = "9" + str;
+            }
+
+            return str;
+        }
+        [Obsolete("This method is deprecated. Please use 'ClearPhoneNumber' class. (Öcal Esmer)", true)]
         public static string ClearPhoneNumber_LeadingCountrCode(this string str)
         {
             if (string.IsNullOrEmpty(str))
@@ -80,7 +100,7 @@ namespace AvvaMobile.Core.Extensions
 
             return str;
         }
-
+        [Obsolete("This method is deprecated. Please use 'ClearPhoneNumber' class. (Öcal Esmer)", true)]
         public static string ClearPhoneNumber_LeadingZero(this string str)
         {
             if (string.IsNullOrEmpty(str))
@@ -101,7 +121,7 @@ namespace AvvaMobile.Core.Extensions
 
             return str;
         }
-
+        [Obsolete("This method is deprecated. Please use 'ClearPhoneNumber' class. (Öcal Esmer)", true)]
         public static string ClearPhoneNumber_NoLeadingNumber(this string str)
         {
             if (string.IsNullOrEmpty(str))
