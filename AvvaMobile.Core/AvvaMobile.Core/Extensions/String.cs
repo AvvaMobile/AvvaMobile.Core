@@ -200,5 +200,32 @@ namespace AvvaMobile.Core.Extensions
         {
             return date.ToString("dd.MM.yyyy");
         }
+
+        /// <summary>
+        /// Return initial characters of first two words of a string.
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static string GetInitials(this string str)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return string.Empty;
+            }
+
+            var words = str.Split(' ');
+            if (words.Length == 1)
+            {
+                return words[0].Substring(0, 1);
+            }
+            else if (words.Length >= 2)
+            {
+                return words[0].Substring(0, 1) + words[1].Substring(0, 1);
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
     }
 }
