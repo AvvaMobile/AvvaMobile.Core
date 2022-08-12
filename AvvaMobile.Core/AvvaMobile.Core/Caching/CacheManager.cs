@@ -43,6 +43,7 @@ namespace AvvaMobile.Core.Caching
     public interface ICacheManager
     {
         public T Get<T>(string key);
+        public string Get(string key);
         public void SetHours(string key, object data, int hours);
         public void SetMinutes(string key, object data, int minutes);
         public void SetNeverRemove(string key, object data);
@@ -50,32 +51,39 @@ namespace AvvaMobile.Core.Caching
 
     public class CacheManagerKeys
     {
+        private readonly ICacheManager _cacheManager;
+
+        public CacheManagerKeys(ICacheManager cacheManager)
+        {
+            _cacheManager = cacheManager;
+        }
+
         public const string Common_MinPasswordLength = "Common_MinPasswordLength";
-        public const string Common_AppName = "Common_AppName";
-        public const string Common_CMSAppUrl = "Common_CMSAppUrl";
+        public string Common_AppName { get { return _cacheManager.Get("Common.AppName"); } }
+        public string Common_CMSAppUrl { get { return _cacheManager.Get("Common_CMSAppUrl"); } }
+        public string CDN_FTP_Url { get { return _cacheManager.Get("CDN_FTP_Url"); } }
+        public string CDN_FTP_UseSSL { get { return _cacheManager.Get("CDN_FTP_UseSSL"); } }
+        public string CDN_FTP_Username { get { return _cacheManager.Get("CDN_FTP_Username"); } }
+        public string CDN_FTP_Password { get { return _cacheManager.Get("CDN_FTP_Password"); } }
+        public string CDN_FTP_Port { get { return _cacheManager.Get("CDN_FTP_Port"); } }
 
-        public const string CDN_FTP_Url = "CDN_FTP_Url";
-        public const string CDN_FTP_UseSSL = "CDN_FTP_UseSSL";
-        public const string CDN_FTP_Username = "CDN_FTP_Username";
-        public const string CDN_FTP_Password = "CDN_FTP_Password";
-        public const string CDN_FTP_Port = "CDN_FTP_Port";
+        public string SMTP_Url { get { return _cacheManager.Get("SMTP_Url"); } }
+        public string SMTP_UseSSL { get { return _cacheManager.Get("SMTP_UseSSL"); } }
 
-        public const string SMTP_Url = "SMTP_Url";
-        public const string SMTP_UseSSL = "SMTP_UseSSL";
-        public const string SMTP_Sender = "SMTP_Sender";
-        public const string SMTP_Username = "SMTP_Username";
-        public const string SMTP_Password = "SMTP_Password";
-        public const string SMTP_Port = "SMTP_Port";
+        public string SMTP_Sender { get { return _cacheManager.Get("SMTP_Sender"); } }
+        public string SMTP_Username { get { return _cacheManager.Get("SMTP_Username"); } }
+        public string SMTP_Password { get { return _cacheManager.Get("SMTP_Password"); } }
+        public string SMTP_Port { get { return _cacheManager.Get("SMTP_Port"); } }
 
-        public const string OneSignal_APIKey = "OneSignal_APIKey";
-        public const string OneSignal_AppID = "OneSignal_AppID";
+        public string OneSignal_APIKey { get { return _cacheManager.Get("OneSignal_APIKey"); } }
+        public string OneSignal_AppID { get { return _cacheManager.Get("OneSignal_AppID"); } }
 
-        public const string SMS_Url = "SMS_Url";
-        public const string SMS_Username = "SMS_Username";
-        public const string SMS_Password = "SMS_Password";
+        public string SMS_Url { get { return _cacheManager.Get("SMS_Url"); } }
+        public string SMS_Username { get { return _cacheManager.Get("SMS_Username"); } }
+        public string SMS_Password { get { return _cacheManager.Get("SMS_Password"); } }
 
-        public const string CDN_BaseUrl = "CDN_BaseUrl";
-        public const string CDN_UsersImageFolder = "CDN_UsersImageFolder";
-        public const string CDN_CustomersImageFolder = "CDN_CustomersImageFolder";
+        public string CDN_BaseUrl { get { return _cacheManager.Get("CDN_BaseUrl"); } }
+        public string CDN_UsersImageFolder { get { return _cacheManager.Get("CDN_UsersImageFolder"); } }
+        public string CDN_CustomersImageFolder { get { return _cacheManager.Get("CDN_CustomersImageFolder"); } }
     }
 }
