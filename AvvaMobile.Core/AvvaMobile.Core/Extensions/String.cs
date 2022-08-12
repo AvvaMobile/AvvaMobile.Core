@@ -59,6 +59,7 @@ namespace AvvaMobile.Core.Extensions
                 return str;
             }
         }
+
         public static string ClearPhoneNumber(this string str)
         {
             if (string.IsNullOrEmpty(str))
@@ -79,6 +80,7 @@ namespace AvvaMobile.Core.Extensions
 
             return str;
         }
+        
         [Obsolete("This method is deprecated. Please use 'ClearPhoneNumber' class. (Öcal Esmer)", true)]
         public static string ClearPhoneNumber_LeadingCountrCode(this string str)
         {
@@ -100,6 +102,7 @@ namespace AvvaMobile.Core.Extensions
 
             return str;
         }
+        
         [Obsolete("This method is deprecated. Please use 'ClearPhoneNumber' class. (Öcal Esmer)", true)]
         public static string ClearPhoneNumber_LeadingZero(this string str)
         {
@@ -121,6 +124,7 @@ namespace AvvaMobile.Core.Extensions
 
             return str;
         }
+        
         [Obsolete("This method is deprecated. Please use 'ClearPhoneNumber' class. (Öcal Esmer)", true)]
         public static string ClearPhoneNumber_NoLeadingNumber(this string str)
         {
@@ -150,6 +154,8 @@ namespace AvvaMobile.Core.Extensions
         }
 
         private const string Dash = "-";
+
+        private const string Dot = ".";
 
         public static string ToKeyword(this string str)
         {
@@ -190,15 +196,15 @@ namespace AvvaMobile.Core.Extensions
             return str;
         }
 
+        /// <summary>
+        /// Waits a date sting as formatted "dd.MM.yyyy" and return datetime object.
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
         public static DateTime DateTimeParseExact(this string str)
         {
             CultureInfo provider = CultureInfo.InvariantCulture;
             return DateTime.ParseExact(str, "dd.MM.yyyy", provider);
-        }
-
-        public static string ParseDateToDefaultStringFormat(this DateTime date)
-        {
-            return date.ToString("dd.MM.yyyy");
         }
 
         /// <summary>
@@ -226,6 +232,26 @@ namespace AvvaMobile.Core.Extensions
             {
                 return string.Empty;
             }
+        }
+
+        public static bool ToBool(this string str)
+        {
+            return bool.Parse(str);
+        }
+
+        public static int ToInt(this string str)
+        {
+            return int.Parse(str);
+        }
+
+        public static decimal ToDecimal(this string str)
+        {
+            return decimal.Parse(str);
+        }
+
+        public static long ToLong(this string str)
+        {
+            return long.Parse(str);
         }
     }
 }
