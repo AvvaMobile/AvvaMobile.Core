@@ -26,9 +26,16 @@ namespace AvvaMobile.Core.DataTable
         public DateTime? FilterStartDate { get; set; }
         public DateTime? FilterEndDate { get; set; }
         public int? PageSize { get; set; }
-        public int? Skip { get; set; }
+        public int Skip { get; set; }
         public int? RecordsTotal { get; set; }
         public string selectedDate { get; set; }
         public int? selectedStatus { get; set; }
+        public bool SearchAllColumns { get; set; }
+        public List<SearchItem> SearchItems { get; set; }
+    }
+    public class SearchItem
+    {
+        public string SearchColumn { get; set; }
+        public string SearchValue { get; set; }
     }
 }
