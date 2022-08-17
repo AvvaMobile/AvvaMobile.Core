@@ -1,12 +1,16 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 
 namespace AvvaMobile.Core.Utilities.FtpUpload
 {
-    public class CDNFileUploadManager
+    public class FileUpload
     {
+        private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly IFTPClient _ftpClient;
-        public CDNFileUploadManager(IFTPClient ftpClient)
+
+        public FileUpload(IWebHostEnvironment hostingEnvironment, IFTPClient ftpClient)
         {
+            _hostingEnvironment = hostingEnvironment;
             _ftpClient = ftpClient;
         }
 
@@ -17,8 +21,8 @@ namespace AvvaMobile.Core.Utilities.FtpUpload
             if (file != null && file.Length > 0)
             {
                 var extension = Path.GetExtension(file.FileName);
-                var newFileName = CodeGenerator.GenerateFileName(extension);
-                var uploadFolder = Path.Combine(FTPClient.WebRootPath, "Temp");
+                var newFileName = GenerateFileName(extension);
+                var uploadFolder = Path.Combine(_hostingEnvironment.WebRootPath, "Temp");
                 var filePath = Path.Combine(uploadFolder, newFileName);
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
@@ -48,13 +52,13 @@ namespace AvvaMobile.Core.Utilities.FtpUpload
                 string fileName = file.FileName;
                 if (generateNewName)
                 {
-                    fileName = CodeGenerator.GenerateFileName(extension);
+                    fileName = GenerateFileName(extension);
                 }
                 else if (!string.IsNullOrWhiteSpace(newFileName))
                 {
                     fileName = Path.Combine(newFileName, extension);
                 }
-                var uploadFolder = Path.Combine(FTPClient.WebRootPath, folder);
+                var uploadFolder = Path.Combine(_hostingEnvironment.WebRootPath, folder);
                 var filePath = Path.Combine(uploadFolder, fileName);
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
@@ -70,39 +74,17 @@ namespace AvvaMobile.Core.Utilities.FtpUpload
             result.IsSuccess = false;
             return result;
         }
-
-        public FileUploadResult RemoveFile(string fileName, string folder)
+        public string GenerateFileName(string extension)
         {
-            var result = new FileUploadResult();
-            if (string.IsNullOrWhiteSpace(fileName) || string.IsNullOrWhiteSpace(folder))
-            {
-                result.IsSuccess = false;
-                return result;
-            }
-            var uploadFolder = Path.Combine(FTPClient.WebRootPath, "Temp");
-            var filePath = Path.Combine(uploadFolder, fileName);
-
-            File.Delete(filePath);
-
-            _ftpClient.Remove(fileName, folder);
-
-
-            result.IsSuccess = true;
-            return result;
+            var name = Guid.NewGuid() + extension;
+            return name;
         }
+
         public class FileUploadResult
         {
             public string FileName { get; set; }
             public bool IsSuccess { get; set; }
             public Exception Exception { get; set; }
-        }
-    }
-    public static class CodeGenerator
-    {
-        public static string GenerateFileName(string extension)
-        {
-            var name = Guid.NewGuid() + extension;
-            return name;
         }
     }
 }

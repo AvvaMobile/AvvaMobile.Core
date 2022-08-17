@@ -1,34 +1,32 @@
 ﻿using AvvaMobile.Core.Caching;
 using Microsoft.AspNetCore.Hosting;
-using System;
-using System.IO;
 using System.Net;
 
 namespace AvvaMobile.Core.Utilities.FtpUpload
 {
     public class FTPClient : IFTPClient
     {
-        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly AppSettingsKeys _appSettingsKeys;
-        public static string WebRootPath = string.Empty;
-        public FTPClient(IHostingEnvironment hostingEnvironment, AppSettingsKeys appSettingsKeys)
+        public FTPClient(IWebHostEnvironment hostingEnvironment, AppSettingsKeys appSettingsKeys)
         {
             _hostingEnvironment = hostingEnvironment;
             _appSettingsKeys = appSettingsKeys;
         }
 
 
-        // TODO: burası yeniden yapılandırılacak .net 6 da bu yok
+        // TODO: burası yeniden yapılandırılacak .net 6 da WebClient yok
         public void Upload(FileInfo fileInfo, string uploadFolder)
         {
-            var CDNFtpHost = _appSettingsKeys.CDN_FTP_Url;
-            var CDNFtpUsername = _appSettingsKeys.CDN_FTP_Username;
-            var CDNFtpPassword = _appSettingsKeys.CDN_FTP_Password;
+            string CDNFtpHost = _appSettingsKeys.CDN_FTP_Url;
+            string CDNFtpUsername = _appSettingsKeys.CDN_FTP_Username;
+            string CDNFtpPassword = _appSettingsKeys.CDN_FTP_Password;
+
             using (var client = new WebClient())
             {
                 client.Proxy = null;
                 client.Credentials = new NetworkCredential(CDNFtpUsername, CDNFtpPassword);
-                client.UploadFile(CDNFtpHost + uploadFolder + fileInfo.Name, "STOR", fileInfo.FullName);
+                client.UploadFile(CDNFtpHost + "/" + uploadFolder + "/" + fileInfo.Name, "STOR", fileInfo.FullName);
             }
         }
 
@@ -113,21 +111,6 @@ namespace AvvaMobile.Core.Utilities.FtpUpload
             }
             return ms.ToArray();
         }
-        public void Remove(string fileName, string folder)
-        {
-            var CDNFtpHost = _appSettingsKeys.CDN_FTP_Url;
-            var CDNFtpUsername = _appSettingsKeys.CDN_FTP_Username;
-            var CDNFtpPassword = _appSettingsKeys.CDN_FTP_Password;
-
-            var removedFilePath = "ftp://" + CDNFtpHost + folder + fileName;
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(removedFilePath);
-            request.Credentials = new NetworkCredential(CDNFtpUsername, CDNFtpPassword);
-            request.Method = WebRequestMethods.Ftp.DeleteFile;
-
-            //FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-            //Console.WriteLine("Delete status: {0}", response.StatusDescription);
-            //response.Close();
-        }
     }
 
     public interface IFTPClient
@@ -136,6 +119,5 @@ namespace AvvaMobile.Core.Utilities.FtpUpload
         void UploadSavedFile(string fileFullUrl, string cdnUploadFolder);
         string UploadFromExternalUrl(string fileUrl, string uploadFolder);
         byte[] DownloadExternalFile(string fileUrl);
-        void Remove(string fileName, string folder);
     }
 }
