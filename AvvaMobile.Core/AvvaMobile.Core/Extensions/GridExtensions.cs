@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Linq.Dynamic.Core;
 
-namespace Quark.Core
+namespace AvvaMobile.Core.Extensions
 {
     public static class GridExtensions
     {
