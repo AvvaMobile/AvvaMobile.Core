@@ -8,7 +8,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Doctic.Core.PushNotification
+namespace AvvaMobile.Core.Utilities.PushNotification
 {
     public class PushNotificationService : BasePushNotificationService, IPushNotificationService
     {

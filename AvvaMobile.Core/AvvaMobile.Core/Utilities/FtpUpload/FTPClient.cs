@@ -42,7 +42,6 @@ namespace AvvaMobile.Core.Utilities.FtpUpload
 
                 var fileBytes = DownloadExternalFile(fileUrl);
                 var fileFullPath = SaveFile(fileName, fileBytes, cdnUploadFolder);
-                //Upload(new FileInfo(fileFullPath), cdnUploadFolder);
                 return fileName;
             }
             catch
