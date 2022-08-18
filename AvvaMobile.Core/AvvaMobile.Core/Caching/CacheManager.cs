@@ -58,22 +58,22 @@ namespace AvvaMobile.Core.Caching
             _cacheManager = cacheManager;
         }
 
-        public int Common_MinPasswordLength { get { return _cacheManager.Get<int>("Common_MinPasswordLength"); } }
+        public string Common_MinPasswordLength { get { return _cacheManager.Get("Common_MinPasswordLength"); } }
         public string Common_AppName { get { return _cacheManager.Get("Common_AppName"); } }
         public string Common_CMSAppUrl { get { return _cacheManager.Get("Common_CMSAppUrl"); } }
 
         public string CDN_FTP_Url { get { return _cacheManager.Get("CDN_FTP_Url"); } }
-        public bool CDN_FTP_UseSSL { get { return _cacheManager.Get<bool>("CDN_FTP_UseSSL"); } }
+        public string CDN_FTP_UseSSL { get { return _cacheManager.Get("CDN_FTP_UseSSL"); } }
         public string CDN_FTP_Username { get { return _cacheManager.Get("CDN_FTP_Username"); } }
         public string CDN_FTP_Password { get { return _cacheManager.Get("CDN_FTP_Password"); } }
-        public int CDN_FTP_Port { get { return _cacheManager.Get<int>("CDN_FTP_Port"); } }
+        public string CDN_FTP_Port { get { return _cacheManager.Get("CDN_FTP_Port"); } }
 
         public string SMTP_Url { get { return _cacheManager.Get("SMTP_Url"); } }
-        public bool SMTP_UseSSL { get { return _cacheManager.Get<bool>("SMTP_UseSSL"); } }
+        public string SMTP_UseSSL { get { return _cacheManager.Get("SMTP_UseSSL"); } }
         public string SMTP_Sender { get { return _cacheManager.Get("SMTP_Sender"); } }
         public string SMTP_Username { get { return _cacheManager.Get("SMTP_Username"); } }
         public string SMTP_Password { get { return _cacheManager.Get("SMTP_Password"); } }
-        public int SMTP_Port { get { return _cacheManager.Get<int>("SMTP_Port"); } }
+        public string SMTP_Port { get { return _cacheManager.Get("SMTP_Port"); } }
 
         public string OneSignal_APIKey { get { return _cacheManager.Get("OneSignal_APIKey"); } }
         public string OneSignal_AppID { get { return _cacheManager.Get("OneSignal_AppID"); } }
