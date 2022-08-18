@@ -5,10 +5,10 @@ namespace AvvaMobile.Core.Utilities.FtpUpload
 {
     public class FileUpload
     {
-        private readonly IWebHostEnvironment _hostingEnvironment;
+        private readonly IHostingEnvironment _hostingEnvironment;
         private readonly IFTPClient _ftpClient;
 
-        public FileUpload(IWebHostEnvironment hostingEnvironment, IFTPClient ftpClient)
+        public FileUpload(IHostingEnvironment hostingEnvironment, IFTPClient ftpClient)
         {
             _hostingEnvironment = hostingEnvironment;
             _ftpClient = ftpClient;
