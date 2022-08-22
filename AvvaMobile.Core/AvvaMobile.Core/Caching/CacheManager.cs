@@ -87,9 +87,9 @@ namespace AvvaMobile.Core.Caching
         public string CDN_UsersImageFolder { get { return _cacheManager.Get("CDN_UsersImageFolder"); } }
         public string CDN_CustomersImageFolder { get { return _cacheManager.Get("CDN_CustomersImageFolder"); } }
 
-        public string CDN_TokenIssuer { get { return _cacheManager.Get("CDN_TokenIssuer"); } }
-        public string CDN_TokenAudience { get { return _cacheManager.Get("CDN_TokenAudience"); } }
-        public string CDN_TokenSecurityKey { get { return _cacheManager.Get("CDN_TokenSecurityKey"); } }
+        public string JWT_TokenIssuer { get { return _cacheManager.Get("JWT_TokenIssuer"); } }
+        public string JWT_TokenAudience { get { return _cacheManager.Get("JWT_TokenAudience"); } }
+        public string JWT_TokenSecurityKey { get { return _cacheManager.Get("JWT_TokenSecurityKey"); } }
 
 
     }
