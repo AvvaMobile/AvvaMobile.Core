@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using AvvaMobile.Core.Caching;
+using Microsoft.Extensions.Configuration;
 using System.Net;
 using System.Web;
 
@@ -6,10 +7,11 @@ namespace AvvaMobile.Core.SMSSender
 {
     public class IletiMerkezi : ISMSSender
     {
-        private readonly IConfiguration _configuration;
-        public IletiMerkezi(IConfiguration configuration)
+        private readonly AppSettingsKeys _appSettingsKeys;
+
+        public IletiMerkezi(AppSettingsKeys appSettingsKeys)
         {
-            _configuration = configuration;
+            _appSettingsKeys = appSettingsKeys;
         }
 
         public async Task<SMSSentResult> SendAsync(string receiver, string message)
@@ -18,9 +20,10 @@ namespace AvvaMobile.Core.SMSSender
 
             try
             {
-                var username = _configuration["SMSSender:Username"];
-                var password = _configuration["SMSSender:Password"];
-                var sender = _configuration["SMSSender:Sender"];
+                var username = _appSettingsKeys.SMS_Username;
+                var password = _appSettingsKeys.SMS_Password;
+                var sender = _appSettingsKeys.SMS_Sender;
+
                 message = HttpUtility.UrlEncode(message);
 
                 var url = $"https://api.iletimerkezi.com/v1/send-sms/get/?username={username}&password={password}&text={message}&receipents={receiver}&sender={sender}";

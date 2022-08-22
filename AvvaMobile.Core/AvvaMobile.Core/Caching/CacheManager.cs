@@ -81,9 +81,16 @@ namespace AvvaMobile.Core.Caching
         public string SMS_Url { get { return _cacheManager.Get("SMS_Url"); } }
         public string SMS_Username { get { return _cacheManager.Get("SMS_Username"); } }
         public string SMS_Password { get { return _cacheManager.Get("SMS_Password"); } }
+        public string SMS_Sender { get { return _cacheManager.Get("SMS_Sender"); } }
 
         public string CDN_BaseUrl { get { return _cacheManager.Get("CDN_BaseUrl"); } }
         public string CDN_UsersImageFolder { get { return _cacheManager.Get("CDN_UsersImageFolder"); } }
         public string CDN_CustomersImageFolder { get { return _cacheManager.Get("CDN_CustomersImageFolder"); } }
+
+        public string CDN_TokenIssuer { get { return _cacheManager.Get("CDN_TokenIssuer"); } }
+        public string CDN_TokenAudience { get { return _cacheManager.Get("CDN_TokenAudience"); } }
+        public string CDN_TokenSecurityKey { get { return _cacheManager.Get("CDN_TokenSecurityKey"); } }
+
+
     }
 }
