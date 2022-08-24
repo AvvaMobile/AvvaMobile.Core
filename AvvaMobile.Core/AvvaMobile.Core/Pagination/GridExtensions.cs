@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Linq.Dynamic.Core;
 
-namespace AvvaMobile.Core.Extensions
+namespace AvvaMobile.Core.Pagination
 {
     public static class GridExtensions
     {
