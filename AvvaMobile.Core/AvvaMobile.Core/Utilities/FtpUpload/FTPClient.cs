@@ -7,8 +7,8 @@ namespace AvvaMobile.Core.Utilities.FtpUpload
     public class FTPClient : IFTPClient
     {
         private readonly IHostingEnvironment _hostingEnvironment;
-        private readonly AppSettingsKeys _appSettingsKeys;
-        public FTPClient(IHostingEnvironment hostingEnvironment, AppSettingsKeys appSettingsKeys)
+        private readonly IAppSettingsKeys _appSettingsKeys;
+        public FTPClient(IHostingEnvironment hostingEnvironment, IAppSettingsKeys appSettingsKeys)
         {
             _hostingEnvironment = hostingEnvironment;
             _appSettingsKeys = appSettingsKeys;

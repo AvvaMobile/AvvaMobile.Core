@@ -7,9 +7,9 @@ namespace AvvaMobile.Core.SMSSender
 {
     public class IletiMerkezi : ISMSSender
     {
-        private readonly AppSettingsKeys _appSettingsKeys;
+        private readonly IAppSettingsKeys _appSettingsKeys;
 
-        public IletiMerkezi(AppSettingsKeys appSettingsKeys)
+        public IletiMerkezi(IAppSettingsKeys appSettingsKeys)
         {
             _appSettingsKeys = appSettingsKeys;
         }
