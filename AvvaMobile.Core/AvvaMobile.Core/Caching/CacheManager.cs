@@ -49,7 +49,7 @@ namespace AvvaMobile.Core.Caching
         public void SetNeverRemove(string key, object data);
     }
 
-    public class AppSettingsKeys
+    public class AppSettingsKeys : IAppSettingsKeys
     {
         private readonly ICacheManager _cacheManager;
 
