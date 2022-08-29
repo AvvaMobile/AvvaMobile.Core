@@ -12,9 +12,9 @@ namespace AvvaMobile.Core.Utilities.PushNotification
 {
     public class PushNotificationService : BasePushNotificationService, IPushNotificationService
     {
-        private readonly IAppSettingsKeys _appSettingsKeys;
+        private readonly AppSettingsKeys _appSettingsKeys;
 
-        public PushNotificationService(IAppSettingsKeys appSettingsKeys)
+        public PushNotificationService(AppSettingsKeys appSettingsKeys)
         {
             _appSettingsKeys = appSettingsKeys;
         }

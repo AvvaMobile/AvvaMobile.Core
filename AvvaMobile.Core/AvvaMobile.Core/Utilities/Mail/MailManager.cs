@@ -11,9 +11,9 @@ namespace AvvaMobile.Core.Utilities.Mail
     {
 
         private IHostingEnvironment _hostingEnvironment;
-        private readonly IAppSettingsKeys _appSettingsKeys;
+        private readonly AppSettingsKeys _appSettingsKeys;
         private readonly IHttpContextAccessor _httpContext;
-        public MailManager(IHostingEnvironment hostingEnvironment, IAppSettingsKeys appSettingsKeys, IHttpContextAccessor httpContext)
+        public MailManager(IHostingEnvironment hostingEnvironment, AppSettingsKeys appSettingsKeys, IHttpContextAccessor httpContext)
         {
             _hostingEnvironment = hostingEnvironment;
             _appSettingsKeys = appSettingsKeys;
