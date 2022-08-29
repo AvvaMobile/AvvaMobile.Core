@@ -49,7 +49,7 @@ namespace AvvaMobile.Core.Caching
         public void SetNeverRemove(string key, object data);
     }
 
-    public class AppSettingsKeys : IAppSettingsKeys
+    public class AppSettingsKeys
     {
         private readonly ICacheManager _cacheManager;
 
@@ -86,36 +86,5 @@ namespace AvvaMobile.Core.Caching
         public string CDN_BaseUrl { get { return _cacheManager.Get("CDN_BaseUrl"); } }
         public string CDN_UsersImageFolder { get { return _cacheManager.Get("CDN_UsersImageFolder"); } }
         public string CDN_CustomersImageFolder { get { return _cacheManager.Get("CDN_CustomersImageFolder"); } }
-    }
-    public interface IAppSettingsKeys
-    {
-        public string Common_MinPasswordLength { get; }
-        public string Common_AppName { get; }
-        public string Common_CMSAppUrl { get; }
-
-        public string CDN_FTP_Url { get; }
-        public string CDN_FTP_UseSSL { get; }
-        public string CDN_FTP_Username { get; }
-        public string CDN_FTP_Password { get; }
-        public string CDN_FTP_Port { get; }
-
-        public string SMTP_Url { get; }
-        public string SMTP_UseSSL { get; }
-        public string SMTP_Sender { get; }
-        public string SMTP_Username { get; }
-        public string SMTP_Password { get; }
-        public string SMTP_Port { get; }
-
-        public string OneSignal_APIKey { get; }
-        public string OneSignal_AppID { get; }
-
-        public string SMS_Url { get; }
-        public string SMS_Username { get; }
-        public string SMS_Password { get; }
-        public string SMS_Sender { get; }
-
-        public string CDN_BaseUrl { get; }
-        public string CDN_UsersImageFolder { get; }
-        public string CDN_CustomersImageFolder { get; }
     }
 }
