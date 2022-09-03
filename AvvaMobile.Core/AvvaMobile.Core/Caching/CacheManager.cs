@@ -61,6 +61,8 @@ namespace AvvaMobile.Core.Caching
         public string Common_MinPasswordLength { get { return _cacheManager.Get("Common_MinPasswordLength"); } }
         public string Common_AppName { get { return _cacheManager.Get("Common_AppName"); } }
         public string Common_CMSAppUrl { get { return _cacheManager.Get("Common_CMSAppUrl"); } }
+        public string Common_CookieName { get { return _cacheManager.Get("Common_CookieName"); } }
+
 
         public string CDN_FTP_Url { get { return _cacheManager.Get("CDN_FTP_Url"); } }
         public string CDN_FTP_UseSSL { get { return _cacheManager.Get("CDN_FTP_UseSSL"); } }
