@@ -1,12 +1,7 @@
 ﻿using AvvaMobile.Core.Caching;
-using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace AvvaMobile.Core.Utilities.PushNotification
 {
@@ -21,11 +16,11 @@ namespace AvvaMobile.Core.Utilities.PushNotification
 
         public async Task<PushNotificationSendResult> SendAsync(string userPushID, string message)
         {
-            return  await SendAsync(new List<string> { userPushID }, null, message);
+            return await SendAsync(new List<string> { userPushID }, null, message);
         }
         public async Task<PushNotificationSendResult> SendAsync(List<string> userPushIDs, string message)
         {
-            return  await SendAsync(userPushIDs, null, message);
+            return await SendAsync(userPushIDs, null, message);
         }
 
         public async Task<PushNotificationSendResult> SendAsync(string userPushID, string title, string message)
@@ -37,7 +32,7 @@ namespace AvvaMobile.Core.Utilities.PushNotification
         {
             string appID = _appSettingsKeys.OneSignal_AppID;
             string apiKey = _appSettingsKeys.OneSignal_APIKey;
-            var pusNotificationResult =  await SendNotificationAsync(appID, apiKey, userPushIDs, title, message);
+            var pusNotificationResult = await SendNotificationAsync(appID, apiKey, userPushIDs, title, message);
             return pusNotificationResult;
         }
     }
@@ -55,12 +50,12 @@ namespace AvvaMobile.Core.Utilities.PushNotification
                 return result;
             }
 
-            string[] membersString = userPushIDs.ToArray();
+            string[] customersString = userPushIDs.ToArray();
 
             var model = new
             {
                 app_id = appID,
-                include_player_ids = membersString,
+                include_player_ids = customersString,
                 contents = new { en = message },
                 headings = new { en = title }
             };
@@ -116,6 +111,3 @@ namespace AvvaMobile.Core.Utilities.PushNotification
         Task<PushNotificationSendResult> SendAsync(string playerID, string title, string message);
     }
 }
-
-
-

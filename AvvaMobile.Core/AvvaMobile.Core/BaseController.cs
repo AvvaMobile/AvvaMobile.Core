@@ -1,7 +1,6 @@
 ﻿using AvvaMobile.Core.Business;
 using AvvaMobile.Core.Extensions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Localization;
 using System.Security.Claims;
 
 namespace AvvaMobile.Core
@@ -44,7 +43,7 @@ namespace AvvaMobile.Core
             {
                 return int.Parse(User.Identities.FirstOrDefault(u => u.IsAuthenticated && u.HasClaim(c => c.Type == ClaimTypes.NameIdentifier))?.FindFirst(ClaimTypes.NameIdentifier).Value);
             }
-        }     
+        }
         public string CurrentUserName
         {
             get
