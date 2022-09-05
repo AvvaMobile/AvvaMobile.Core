@@ -33,9 +33,4 @@ namespace AvvaMobile.Core.DataTable
         public bool SearchAllColumns { get; set; }
         public List<SearchItem> SearchItems { get; set; }
     }
-    public class SearchItem
-    {
-        public string SearchColumn { get; set; }
-        public string SearchValue { get; set; }
-    }
 }
