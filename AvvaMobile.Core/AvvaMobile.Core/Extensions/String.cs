@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AvvaMobile.Core.Caching;
+using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
@@ -6,6 +7,7 @@ namespace AvvaMobile.Core.Extensions
 {
     public static class StringExtension
     {
+        public static AppSettingsKeys _appSettingsKeys;
         public static bool IsNullOrEmtpy(this string str)
         {
             return string.IsNullOrEmpty(str);
@@ -252,6 +254,15 @@ namespace AvvaMobile.Core.Extensions
         public static long ToLong(this string str)
         {
             return long.Parse(str);
+        }
+        public static string PrepareCDNUrl(this string imageUrl, string folder)
+        {
+            if (string.IsNullOrEmpty(imageUrl))
+            {
+                return imageUrl;
+            }
+
+            return string.Format("{0}{1}{2}", _appSettingsKeys.CDN_BaseUrl, folder, imageUrl);
         }
     }
 }
