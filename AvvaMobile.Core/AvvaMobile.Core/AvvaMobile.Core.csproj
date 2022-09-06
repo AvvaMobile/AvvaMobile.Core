@@ -13,9 +13,9 @@
     <RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
     <RunAnalyzersDuringLiveAnalysis>False</RunAnalyzersDuringLiveAnalysis>
     <EnableNETAnalyzers>False</EnableNETAnalyzers>
-    <AssemblyVersion>1.0.45</AssemblyVersion>
-    <FileVersion>1.0.45</FileVersion>
-    <Version>1.0.45</Version>
+    <AssemblyVersion>1.0.46</AssemblyVersion>
+    <FileVersion>1.0.46</FileVersion>
+    <Version>1.0.46</Version>
     <PackageIcon>avvamobile.png</PackageIcon>
     <Description>This package is build for Avva Mobile developers to make their solutions easy to develop.</Description>
     <Copyright>Avva Mobile Enterprise Solutions</Copyright>
@@ -32,6 +32,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.8" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0.1" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.22.1" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.22.1" />
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.19" />
   </ItemGroup>
 
