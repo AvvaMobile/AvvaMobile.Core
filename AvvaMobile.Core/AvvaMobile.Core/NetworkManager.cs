@@ -29,10 +29,19 @@ namespace AvvaMobile.Core
 
         public NetworkManager(string baseAddress)
         {
-            client.BaseAddress = new Uri(baseAddress);
+            SetBaseAddress(baseAddress);
         }
 
         readonly System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
+
+        /// <summary>
+        /// Updates the base address of http client.
+        /// </summary>
+        /// <param name="baseAddress"></param>
+        public void SetBaseAddress(string baseAddress)
+        {
+            client.BaseAddress = new Uri(baseAddress);
+        }
 
         /// <summary>
         /// Clears all existing header from the client.
