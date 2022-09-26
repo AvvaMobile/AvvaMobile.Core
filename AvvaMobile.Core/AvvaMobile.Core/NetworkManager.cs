@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using AvvaMobile.Core.Business;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using System.Text;
 
 namespace AvvaMobile.Core
@@ -6,15 +8,20 @@ namespace AvvaMobile.Core
     public class HttpResponse
     {
         public bool IsSuccess { get; set; } = true;
-        public string Message { get; set; } = null;
-        public dynamic Data { get; set; } = null;
+        public string Message { get; set; }
+    }
 
+    public class HttpResponse<T> : HttpResponse
+    {
+        public T Data { get; set; }
     }
 
     public interface INetworkManager
     {
+        public void SetBaseAddress();
         public void ClearHeaders();
         public void AddHeader(string name, string value);
+        public void AddContentTypeJSONHeader();
         public Task<HttpResponse> GetAsync(string uri);
         public Task<HttpResponse> GetAsync(string uri, Dictionary<string, string> parameters);
         public Task<HttpResponse> PostAsync(string uri, dynamic data);
@@ -22,6 +29,8 @@ namespace AvvaMobile.Core
 
     public class NetworkManager
     {
+        readonly System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
+
         public NetworkManager()
         {
 
@@ -31,8 +40,6 @@ namespace AvvaMobile.Core
         {
             SetBaseAddress(baseAddress);
         }
-
-        readonly System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
 
         /// <summary>
         /// Updates the base address of http client.
@@ -62,13 +69,21 @@ namespace AvvaMobile.Core
         }
 
         /// <summary>
+        /// Adds "ContentType:application/json" header to current request.
+        /// </summary>
+        public void AddContentTypeJSONHeader()
+        {
+            AddHeader("ContentType", "application/json");
+        }
+
+        /// <summary>
         /// Sends a GET request and returns data as String value.
         /// </summary>
         /// <param name="uri"></param>
         /// <returns></returns>
-        public async Task<HttpResponse> GetAsync(string uri)
+        public async Task<HttpResponse<T>> GetAsync<T>(string uri)
         {
-            return await GetAsync(uri, null);
+            return await GetAsync<T>(uri, null);
         }
 
         /// <summary>
@@ -77,9 +92,9 @@ namespace AvvaMobile.Core
         /// <param name="uri"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public async Task<HttpResponse> GetAsync(string uri, Dictionary<string, string> parameters)
+        public async Task<HttpResponse<T>> GetAsync<T>(string uri, Dictionary<string, string> parameters)
         {
-            var response = new HttpResponse();
+            var response = new HttpResponse<T>();
 
             try
             {
@@ -93,7 +108,17 @@ namespace AvvaMobile.Core
                     }
                 }
 
-                response.Data = await client.GetStringAsync(client.BaseAddress + uri);
+                var resp = await client.GetAsync(client.BaseAddress + uri);
+                response.IsSuccess = resp.IsSuccessStatusCode;
+                var responseString = await resp.Content.ReadAsStringAsync();
+                if (response.IsSuccess)
+                {
+                    response.Data = JsonConvert.DeserializeObject<T>(responseString);
+                }
+                else
+                {
+                    response.Message = responseString;
+                }
             }
             catch (HttpRequestException ex)
             {
@@ -110,9 +135,9 @@ namespace AvvaMobile.Core
         /// <param name="uri"></param>
         /// <param name="data"></param>
         /// <returns></returns>
-        public async Task<HttpResponse> PostAsync(string uri, dynamic data)
+        public async Task<HttpResponse<T>> PostAsync<T>(string uri, dynamic data)
         {
-            var response = new HttpResponse();
+            var response = new HttpResponse<T>();
 
             try
             {
@@ -120,8 +145,16 @@ namespace AvvaMobile.Core
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
                 var resp = await client.PostAsync(client.BaseAddress + uri, content);
-                response.Data = await resp.Content.ReadAsStringAsync();
                 response.IsSuccess = resp.IsSuccessStatusCode;
+                var responseString = await resp.Content.ReadAsStringAsync();
+                if (response.IsSuccess)
+                {
+                    response.Data = JsonConvert.DeserializeObject<T>(responseString);
+                }
+                else
+                {
+                    response.Message = responseString;
+                }                
             }
             catch (HttpRequestException ex)
             {
@@ -138,14 +171,22 @@ namespace AvvaMobile.Core
         /// <param name="uri"></param>
         /// <param name="content"></param>
         /// <returns></returns>
-        public async Task<HttpResponse> PostAsFormDataAsync(string uri, MultipartFormDataContent content)
+        public async Task<HttpResponse<T>> PostAsFormDataAsync<T>(string uri, MultipartFormDataContent content)
         {
-            var response = new HttpResponse();
+            var response = new HttpResponse<T>();
             try
             {
                 var resp = await client.PostAsync(client.BaseAddress + uri, content);
-                response.Data = await resp.Content.ReadAsStringAsync();
                 response.IsSuccess = resp.IsSuccessStatusCode;
+                var responseString = await resp.Content.ReadAsStringAsync();
+                if (response.IsSuccess)
+                {
+                    response.Data = JsonConvert.DeserializeObject<T>(responseString);
+                }
+                else
+                {
+                    response.Message = responseString;
+                }
             }
             catch (HttpRequestException ex)
             {
@@ -162,15 +203,23 @@ namespace AvvaMobile.Core
         /// <param name="uri"></param>
         /// <param name="data"></param>
         /// <returns></returns>
-        public async Task<HttpResponse> DeleteAsync(string uri)
+        public async Task<HttpResponse<T>> DeleteAsync<T>(string uri)
         {
-            var response = new HttpResponse();
+            var response = new HttpResponse<T>();
 
             try
             {
                 var resp = await client.DeleteAsync(uri);
-                response.Data = await resp.Content.ReadAsStringAsync();
                 response.IsSuccess = resp.IsSuccessStatusCode;
+                var responseString = await resp.Content.ReadAsStringAsync();
+                if (response.IsSuccess)
+                {
+                    response.Data = JsonConvert.DeserializeObject<T>(responseString);
+                }
+                else
+                {
+                    response.Message = responseString;
+                }
             }
             catch (HttpRequestException ex)
             {
