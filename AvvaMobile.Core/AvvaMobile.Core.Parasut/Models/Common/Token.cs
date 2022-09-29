@@ -1,6 +1,9 @@
-﻿namespace AvvaMobile.Core.Parasut.Models.Responses
+﻿namespace AvvaMobile.Core.Parasut.Models.Common
 {
-    public class GetTokenResponse
+    /// <summary>
+    /// OAuth ile giriş yapıldıktan sonra tüm güvenlik bilgilerini tutar.
+    /// </summary>
+    public class Token
     {
         public string access_token { get; set; }
         public string token_type { get; set; }

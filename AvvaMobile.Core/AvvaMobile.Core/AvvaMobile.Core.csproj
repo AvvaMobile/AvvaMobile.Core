@@ -13,9 +13,7 @@
     <RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
     <RunAnalyzersDuringLiveAnalysis>False</RunAnalyzersDuringLiveAnalysis>
     <EnableNETAnalyzers>False</EnableNETAnalyzers>
-    <AssemblyVersion>1.0.52</AssemblyVersion>
-    <FileVersion>1.0.52</FileVersion>
-    <Version>1.0.52</Version>
+    <Version>1.0.54</Version>
     <PackageIcon>avvamobile.png</PackageIcon>
     <Description>This package is build for Avva Mobile developers to make their solutions easy to develop.</Description>
     <Copyright>Avva Mobile Enterprise Solutions</Copyright>
@@ -29,12 +27,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AvvaMobile.Core.NetworkManager" Version="1.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.9" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0.1" />
-    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.22.1" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.22.1" />
-    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.19" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.23.1" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.23.1" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.20" />
   </ItemGroup>
 
   <ItemGroup>

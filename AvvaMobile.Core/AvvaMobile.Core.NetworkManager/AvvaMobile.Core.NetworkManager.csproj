@@ -4,16 +4,15 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<Title>Avva Mobile Paraşüt API</Title>
+		<Title>Avva Mobile Network Manager</Title>
 		<Authors>Avva Mobile Enterprise Solutions</Authors>
-		<Description>Avva Mobile tarafından Paraşüt Web API kullanımı için hazırlanmıştır.</Description>
+		<Description>Developed to help developers to easy to manage their network tasks.</Description>
 		<PackageProjectUrl>https://github.com/AvvaMobile/AvvaMobile.Core</PackageProjectUrl>
 		<PackageIcon>avvamobile.png</PackageIcon>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<RepositoryUrl>https://github.com/AvvaMobile/AvvaMobile.Core</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<PackageTags>avvamobile;paraşüt;muhasebe;</PackageTags>
-		<NeutralLanguage>tr</NeutralLanguage>
+		<PackageTags>avvamobile;</PackageTags>
+		<NeutralLanguage>en</NeutralLanguage>
 		<RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
 		<RunAnalyzersDuringLiveAnalysis>False</RunAnalyzersDuringLiveAnalysis>
 		<EnableNETAnalyzers>False</EnableNETAnalyzers>
@@ -22,34 +21,16 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="..\README.md">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</None>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <PackageReference Include="AvvaMobile.Core" Version="1.0.54" />
-	  <PackageReference Include="AvvaMobile.Core.NetworkManager" Version="1.0.7" />
 	  <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<None Update="avvamobile.png">
-			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="README.md">
 			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Models\Responses\" />
 	</ItemGroup>
 
 </Project>

@@ -1,6 +1,5 @@
-﻿using AvvaMobile.Core.Business;
-using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using System.Net;
 using System.Text;
 
 namespace AvvaMobile.Core
@@ -9,22 +8,12 @@ namespace AvvaMobile.Core
     {
         public bool IsSuccess { get; set; } = true;
         public string Message { get; set; }
+        public HttpStatusCode StatusCode { get; set; }
     }
 
     public class HttpResponse<T> : HttpResponse
     {
         public T Data { get; set; }
-    }
-
-    public interface INetworkManager
-    {
-        public void SetBaseAddress();
-        public void ClearHeaders();
-        public void AddHeader(string name, string value);
-        public void AddContentTypeJSONHeader();
-        public Task<HttpResponse> GetAsync(string uri);
-        public Task<HttpResponse> GetAsync(string uri, Dictionary<string, string> parameters);
-        public Task<HttpResponse> PostAsync(string uri, dynamic data);
     }
 
     public class NetworkManager
@@ -69,6 +58,15 @@ namespace AvvaMobile.Core
         }
 
         /// <summary>
+        /// Adds Bearer token to header.
+        /// </summary>
+        /// <param name="token"></param>
+        public void AddBearerToken(string token)
+        {
+            AddHeader("Authorization", $"Bearer {token}");
+        }
+
+        /// <summary>
         /// Adds "ContentType:application/json" header to current request.
         /// </summary>
         public void AddContentTypeJSONHeader()
@@ -98,18 +96,21 @@ namespace AvvaMobile.Core
 
             try
             {
+                var sb = new StringBuilder();
                 if (parameters != null && parameters.Count > 0)
                 {
-                    uri += "?";
-
                     foreach (var param in parameters)
                     {
-                        uri += param.Key + "=" + param.Value + "&";
+                        sb.Append(param.Key);
+                        sb.Append("=");
+                        sb.Append(param.Value);
+                        sb.Append("&");
                     }
                 }
 
-                var resp = await client.GetAsync(client.BaseAddress + uri);
+                var resp = await client.GetAsync($"{client.BaseAddress}{uri}?{sb.ToString()}");
                 response.IsSuccess = resp.IsSuccessStatusCode;
+                response.StatusCode = resp.StatusCode;
                 var responseString = await resp.Content.ReadAsStringAsync();
                 if (response.IsSuccess)
                 {
@@ -144,8 +145,9 @@ namespace AvvaMobile.Core
                 var json = JsonConvert.SerializeObject(data);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var resp = await client.PostAsync(client.BaseAddress + uri, content);
+                var resp = await client.PostAsync($"{client.BaseAddress}{uri}", content);
                 response.IsSuccess = resp.IsSuccessStatusCode;
+                response.StatusCode = resp.StatusCode;
                 var responseString = await resp.Content.ReadAsStringAsync();
                 if (response.IsSuccess)
                 {
@@ -154,7 +156,7 @@ namespace AvvaMobile.Core
                 else
                 {
                     response.Message = responseString;
-                }                
+                }
             }
             catch (HttpRequestException ex)
             {
@@ -176,8 +178,9 @@ namespace AvvaMobile.Core
             var response = new HttpResponse<T>();
             try
             {
-                var resp = await client.PostAsync(client.BaseAddress + uri, content);
+                var resp = await client.PostAsync($"{client.BaseAddress}{uri}", content);
                 response.IsSuccess = resp.IsSuccessStatusCode;
+                response.StatusCode = resp.StatusCode;
                 var responseString = await resp.Content.ReadAsStringAsync();
                 if (response.IsSuccess)
                 {
@@ -211,6 +214,7 @@ namespace AvvaMobile.Core
             {
                 var resp = await client.DeleteAsync(uri);
                 response.IsSuccess = resp.IsSuccessStatusCode;
+                response.StatusCode = resp.StatusCode;
                 var responseString = await resp.Content.ReadAsStringAsync();
                 if (response.IsSuccess)
                 {
