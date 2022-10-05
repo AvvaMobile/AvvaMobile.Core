@@ -168,6 +168,43 @@ namespace AvvaMobile.Core
         }
 
         /// <summary>
+        /// Sends a PUT request with data object. Also returns http response as String value.
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public async Task<HttpResponse<T>> PutAsync<T>(string uri, dynamic data)
+        {
+            var response = new HttpResponse<T>();
+
+            try
+            {
+                var json = JsonConvert.SerializeObject(data);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var resp = await client.PutAsync($"{client.BaseAddress}{uri}", content);
+                response.IsSuccess = resp.IsSuccessStatusCode;
+                response.StatusCode = resp.StatusCode;
+                var responseString = await resp.Content.ReadAsStringAsync();
+                if (response.IsSuccess)
+                {
+                    response.Data = JsonConvert.DeserializeObject<T>(responseString);
+                }
+                else
+                {
+                    response.Message = responseString;
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                response.IsSuccess = false;
+                response.Message = "HttpClient.PutAsync Error: " + ex.Message;
+            }
+
+            return response;
+        }
+
+        /// <summary>
         /// Sends a POST request with form data. Also returns http response as String value.
         /// </summary>
         /// <param name="uri"></param>
