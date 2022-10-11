@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AvvaMobile.Core.Parasut" Version="1.0.8" />
+    <ProjectReference Include="..\AvvaMobile.Core.Parasut\AvvaMobile.Core.Parasut.csproj" />
   </ItemGroup>
 
 </Project>

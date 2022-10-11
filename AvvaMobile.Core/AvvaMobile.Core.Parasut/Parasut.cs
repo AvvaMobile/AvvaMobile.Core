@@ -10,16 +10,14 @@ namespace AvvaMobile.Core.Parasut
 {
     public class Parasut
     {
-        private string AuthURL { get; } = "https://api.parasut.com";
-        private string BaseURL { get { return $"https://api.parasut.com/v4/{CompanyID}"; } }
-
         public string CompanyID { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public string ClientID { get; set; }
         public string ClientSecret { get; set; }
 
-        // Her oturumda bu bilgi saklanarak sürekli aynı token kullanılması sağlanır.
+        private string AuthURL { get; } = "https://api.parasut.com";
+        private string BaseURL { get { return $"https://api.parasut.com/v4/{CompanyID}"; } }
         private string access_token { get; set; }
 
         /// <summary>
@@ -81,6 +79,39 @@ namespace AvvaMobile.Core.Parasut
         }
 
         /// <summary>
+        /// Paraşüt'te müşteriyi yeni bilgiler iler günceller.
+        /// </summary>
+        /// <param name="request">Customer tipinde müşteri bilgilerini alır.</param>
+        /// <returns>Envelope&lt;Customer&gt; tipinde yaratılmış olan müşterinin tüm bilgilerini döner.</returns>
+        public async Task<ServiceResult<Envelope<Customer>>> CustomerEdit(Customer request)
+        {
+            var serviceResult = new ServiceResult<Envelope<Customer>>();
+
+            if (string.IsNullOrEmpty(request.id))
+            {
+                serviceResult.SetError("Müşteri için id alanı boş olamaz.");
+                return serviceResult;
+            }
+
+            await GetTokenAsync();
+
+            var networkManager = new NetworkManager(BaseURL);
+            networkManager.AddContentTypeJSONHeader();
+            networkManager.AddBearerToken(access_token);
+
+            var envelope = new Envelope<Customer>();
+            envelope.data = request;
+
+            var httpResponse = await networkManager.PutAsync<Envelope<Customer>>("/contacts/" + request.id, envelope);
+
+            serviceResult.IsSuccess = httpResponse.IsSuccess;
+            serviceResult.Message = httpResponse.Message;
+            serviceResult.Data = httpResponse.Data;
+
+            return serviceResult;
+        }
+
+        /// <summary>
         /// Paraşüt'teki müşterileri, filtreleme kriterlerine göre listeler.
         /// </summary>
         /// <param name="request">CustomerListRequest tipinde filtreleme özelliklerini alır.</param>
@@ -116,6 +147,87 @@ namespace AvvaMobile.Core.Parasut
             }
 
             var httpResponse = await networkManager.GetAsync<Envelope<List<Customer>>>("/contacts", parameters);
+
+            serviceResult.IsSuccess = httpResponse.IsSuccess;
+            serviceResult.Message = httpResponse.Message;
+            serviceResult.Data = httpResponse.Data;
+
+            return serviceResult;
+        }
+
+        /// <summary>
+        /// Paraşüt'te yeni ürün yaratır.
+        /// </summary>
+        /// <param name="request">Product tipinde ürün bilgilerini alır.</param>
+        /// <returns>Envelope&lt;Product&gt; tipinde yaratılmış olan ürünğn tüm bilgilerini döner.</returns>
+        public async Task<ServiceResult<Envelope<Product>>> ProductCreate(Product request)
+        {
+            var serviceResult = new ServiceResult<Envelope<Product>>();
+
+            await GetTokenAsync();
+
+            var networkManager = new NetworkManager(BaseURL);
+            networkManager.AddContentTypeJSONHeader();
+            networkManager.AddBearerToken(access_token);
+
+            var envelope = new Envelope<Product>();
+            envelope.data = request;
+
+            var httpResponse = await networkManager.PostAsync<Envelope<Product>>("/products", envelope);
+
+            serviceResult.IsSuccess = httpResponse.IsSuccess;
+            serviceResult.Message = httpResponse.Message;
+            serviceResult.Data = httpResponse.Data;
+
+            return serviceResult;
+        }
+
+        /// <summary>
+        /// Paraşüt'teki ürünü günceller.
+        /// </summary>
+        /// <param name="request">Product tipinde ürün bilgilerini alır.</param>
+        /// <returns>Envelope&lt;Product&gt; tipinde yaratılmış olan ürünğn tüm bilgilerini döner.</returns>
+        public async Task<ServiceResult<Envelope<Product>>> ProductEdit(Product request)
+        {
+            var serviceResult = new ServiceResult<Envelope<Product>>();
+
+            await GetTokenAsync();
+
+            var networkManager = new NetworkManager(BaseURL);
+            networkManager.AddContentTypeJSONHeader();
+            networkManager.AddBearerToken(access_token);
+
+            var envelope = new Envelope<Product>();
+            envelope.data = request;
+
+            var httpResponse = await networkManager.PutAsync<Envelope<Product>>("/products/" + request.id, envelope);
+
+            serviceResult.IsSuccess = httpResponse.IsSuccess;
+            serviceResult.Message = httpResponse.Message;
+            serviceResult.Data = httpResponse.Data;
+
+            return serviceResult;
+        }
+
+        /// <summary>
+        /// Paraşüt'te yeni fatura yaratır.
+        /// </summary>
+        /// <param name="request">SalesInvoice tipinde ürün bilgilerini alır.</param>
+        /// <returns>Envelope&lt;SalesInvoice&gt; tipinde yaratılmış olan ürünğn tüm bilgilerini döner.</returns>
+        public async Task<ServiceResult<Envelope<SalesInvoice>>> SalesInvoiceCreate(SalesInvoice request)
+        {
+            var serviceResult = new ServiceResult<Envelope<SalesInvoice>>();
+
+            await GetTokenAsync();
+
+            var networkManager = new NetworkManager(BaseURL);
+            networkManager.AddContentTypeJSONHeader();
+            networkManager.AddBearerToken(access_token);
+
+            var envelope = new Envelope<SalesInvoice>();
+            envelope.data = request;
+
+            var httpResponse = await networkManager.PostAsync<Envelope<SalesInvoice>>("/sales_invoices", envelope);
 
             serviceResult.IsSuccess = httpResponse.IsSuccess;
             serviceResult.Message = httpResponse.Message;
