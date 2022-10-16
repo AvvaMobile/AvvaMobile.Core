@@ -28,18 +28,23 @@ namespace AvvaMobile.Core.Utilities.PushNotification
             return await SendAsync(new List<string> { userPushID }, title, message);
         }
 
-        public async Task<PushNotificationSendResult> SendAsync(List<string> userPushIDs, string title, string message)
+        public async Task<PushNotificationSendResult> SendAsync(string userPushID, string title, string message, dynamic data)
+        {
+            return await SendAsync(new List<string> { userPushID }, title, message, data);
+        }
+
+        public async Task<PushNotificationSendResult> SendAsync(List<string> userPushIDs, string title, string message, dynamic data = null)
         {
             string appID = _appSettingsKeys.OneSignal_AppID;
             string apiKey = _appSettingsKeys.OneSignal_APIKey;
-            var pusNotificationResult = await SendNotificationAsync(appID, apiKey, userPushIDs, title, message);
+            var pusNotificationResult = await SendNotificationAsync(appID, apiKey, userPushIDs, title, message, data);
             return pusNotificationResult;
         }
     }
 
     public class BasePushNotificationService
     {
-        public async Task<PushNotificationSendResult> SendNotificationAsync(string appID, string apiKey, List<string> userPushIDs, string title, string message)
+        public async Task<PushNotificationSendResult> SendNotificationAsync(string appID, string apiKey, List<string> userPushIDs, string title, string message, dynamic data = null)
         {
             var result = new PushNotificationSendResult();
 
@@ -57,6 +62,7 @@ namespace AvvaMobile.Core.Utilities.PushNotification
                 app_id = appID,
                 include_player_ids = customersString,
                 contents = new { en = message },
+                data = data,
                 headings = new { en = title }
             };
 
@@ -105,9 +111,9 @@ namespace AvvaMobile.Core.Utilities.PushNotification
 
     public interface IPushNotificationService
     {
-        Task<PushNotificationSendResult> SendAsync(List<string> playerIDs, string message);
-        Task<PushNotificationSendResult> SendAsync(List<string> playerIDs, string title, string message);
-        Task<PushNotificationSendResult> SendAsync(string playerID, string message);
-        Task<PushNotificationSendResult> SendAsync(string playerID, string title, string message);
+        Task<PushNotificationSendResult> SendAsync(List<string> userPushIDs, string message);
+        Task<PushNotificationSendResult> SendAsync(List<string> userPushIDs, string title, string message, dynamic data = null);
+        Task<PushNotificationSendResult> SendAsync(string userPushID, string message);
+        Task<PushNotificationSendResult> SendAsync(string userPushID, string title, string message, dynamic data = null);
     }
 }
