@@ -11,8 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Paraşüt", "Paraşüt", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvvaMobile.Core.Parasut.Sample", "AvvaMobile.Core.Parasut.Sample\AvvaMobile.Core.Parasut.Sample.csproj", "{38C02529-7A6D-4D5F-8637-1484C60A6880}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvvaMobile.Core.NetworkManager", "AvvaMobile.Core.NetworkManager\AvvaMobile.Core.NetworkManager.csproj", "{E5868C87-CF3B-49DD-8776-E5939180AA86}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,10 +29,6 @@ Global
 		{38C02529-7A6D-4D5F-8637-1484C60A6880}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38C02529-7A6D-4D5F-8637-1484C60A6880}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38C02529-7A6D-4D5F-8637-1484C60A6880}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E5868C87-CF3B-49DD-8776-E5939180AA86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E5868C87-CF3B-49DD-8776-E5939180AA86}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E5868C87-CF3B-49DD-8776-E5939180AA86}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E5868C87-CF3B-49DD-8776-E5939180AA86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
