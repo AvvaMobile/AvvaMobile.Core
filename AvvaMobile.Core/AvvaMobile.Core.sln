@@ -5,12 +5,6 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvvaMobile.Core", "AvvaMobile.Core\AvvaMobile.Core.csproj", "{042B0E6F-FD12-49F3-88D5-6D80F7DED354}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvvaMobile.Core.Parasut", "AvvaMobile.Core.Parasut\AvvaMobile.Core.Parasut.csproj", "{D75A98EC-A019-4AB9-B8BE-614EA6CCC8A0}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Paraşüt", "Paraşüt", "{8EE3559A-ACB8-4E2B-8A79-345630ABA78D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvvaMobile.Core.Parasut.Sample", "AvvaMobile.Core.Parasut.Sample\AvvaMobile.Core.Parasut.Sample.csproj", "{38C02529-7A6D-4D5F-8637-1484C60A6880}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,21 +15,9 @@ Global
 		{042B0E6F-FD12-49F3-88D5-6D80F7DED354}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{042B0E6F-FD12-49F3-88D5-6D80F7DED354}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{042B0E6F-FD12-49F3-88D5-6D80F7DED354}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D75A98EC-A019-4AB9-B8BE-614EA6CCC8A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D75A98EC-A019-4AB9-B8BE-614EA6CCC8A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D75A98EC-A019-4AB9-B8BE-614EA6CCC8A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D75A98EC-A019-4AB9-B8BE-614EA6CCC8A0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{38C02529-7A6D-4D5F-8637-1484C60A6880}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{38C02529-7A6D-4D5F-8637-1484C60A6880}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{38C02529-7A6D-4D5F-8637-1484C60A6880}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{38C02529-7A6D-4D5F-8637-1484C60A6880}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{D75A98EC-A019-4AB9-B8BE-614EA6CCC8A0} = {8EE3559A-ACB8-4E2B-8A79-345630ABA78D}
-		{38C02529-7A6D-4D5F-8637-1484C60A6880} = {8EE3559A-ACB8-4E2B-8A79-345630ABA78D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C0A619B7-1CB0-47AB-91A8-AA0FF9D240A2}
