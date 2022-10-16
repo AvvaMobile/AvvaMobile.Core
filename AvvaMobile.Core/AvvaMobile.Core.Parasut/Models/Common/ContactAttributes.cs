@@ -1,6 +1,6 @@
 ﻿namespace AvvaMobile.Core.Parasut.Models.Common
 {
-    public class CustomerAttributes
+    public class ContactAttributes
     {
         /// <summary>
         /// Müşterinin ticari adı.

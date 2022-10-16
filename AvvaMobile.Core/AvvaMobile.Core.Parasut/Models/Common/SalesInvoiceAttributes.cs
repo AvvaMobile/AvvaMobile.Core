@@ -1,5 +1,9 @@
 ﻿namespace AvvaMobile.Core.Parasut.Models.Common
 {
+    /// <summary>
+    /// Fatura bilgilerini doldurmanın haricinde;
+    /// 1- Relationships içindeki Customer objesine id atamasını yapmayı unutmayınız.
+    /// </summary>
     public class SalesInvoiceAttributes
     {
         /// <summary>
@@ -50,7 +54,7 @@
         /// <summary>
         /// Gönderim telefonu.
         /// </summary>
-        public int billing_phone { get; set; }
+        public string billing_phone { get; set; }
 
         /// <summary>
         /// Müşteri vergi dairesi.

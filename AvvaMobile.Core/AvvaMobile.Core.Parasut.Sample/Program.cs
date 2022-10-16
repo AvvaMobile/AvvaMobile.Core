@@ -2,13 +2,22 @@
 using AvvaMobile.Core.Parasut.Models.Common;
 using AvvaMobile.Core.Parasut.Models.Requests;
 
+//var parasut = new Parasut
+//{
+//    CompanyID = "Company ID",
+//    Username = "Username",
+//    Password = "Password",
+//    ClientID = "Client ID",
+//    ClientSecret = "Client Secret"
+//};
+
 var parasut = new Parasut
 {
-    CompanyID = "Company ID",
-    Username = "Username",
-    Password = "Password",
-    ClientID = "Client ID",
-    ClientSecret = "Client Secret"
+    CompanyID = "211042",
+    Username = "murat.yilmaz@avvamobile.com",
+    Password = "Avva2024059",
+    ClientID = "GPw92--FTE_ep2pcS6GJgyno4zoOtazUjy6ISp1K1bA",
+    ClientSecret = "q3XV2umX9bLeeGyOKDgXKQKurZt1oAjCuM2togBUyxo"
 };
 
 
@@ -19,6 +28,7 @@ var parasut = new Parasut
 //await CustomerList();
 //await ProductCreate();
 //await ProductCreate();
+await SalesInvoiceCreate();
 
 
 Console.ReadKey();
@@ -39,7 +49,7 @@ async Task GetToken()
 
 async Task CustomerCreate()
 {
-    var customer = new Customer();
+    var customer = new Contact();
     customer.attributes.email = "opensource@avvamobile.com";
     customer.attributes.name = "AVVA MOBILE KURUMSAL ÇÖZÜMLER YAZILIM VE DANIŞMANLIK TİC. LTD. ŞTİ.";
     customer.attributes.short_name = "Avva Mobile Enterprise Solutions";
@@ -61,7 +71,7 @@ async Task CustomerCreate()
 
 async Task CustomerEdit()
 {
-    var customer = new Customer();
+    var customer = new Contact();
     customer.id = "1234567890";
     customer.attributes.email = "opensource@avvamobile.com";
     customer.attributes.name = "AVVA MOBILE KURUMSAL ÇÖZÜMLER YAZILIM VE DANIŞMANLIK TİC. LTD. ŞTİ.";
@@ -137,6 +147,40 @@ async Task ProductEdit()
     if (response.IsSuccess)
     {
         Console.WriteLine("Product ID: " + response.Data.data.id);
+    }
+    else
+    {
+        Console.WriteLine("ERROR: " + response.Message);
+    }
+}
+
+async Task SalesInvoiceCreate()
+{
+    var invoice = new SalesInvoice();
+
+    invoice.relationships.contact = new Envelope<ContactBase>() { data = new ContactBase() { id = "99257873" } };
+
+    invoice.attributes.description = "Yeni Fatura Açıklaması";
+    invoice.attributes.issue_date = DateTime.Now;
+    invoice.attributes.due_date = DateTime.Now.AddDays(7);
+    invoice.attributes.invoice_series = "F";
+    invoice.attributes.invoice_id = 1234;
+    invoice.attributes.currency = Currencies.TRL;
+    invoice.attributes.exchange_rate = 18.5m;
+    invoice.attributes.order_no = "1234567890";
+    invoice.attributes.order_date = DateTime.Now;
+    invoice.attributes.shipment_included = true;
+    invoice.attributes.is_abroad = false;
+    invoice.attributes.cash_sale = true;
+    invoice.attributes.payment_account_id = 1009901;
+    invoice.attributes.payment_date = DateTime.Now;
+    invoice.attributes.payment_description = "Peşin Satış Ödemesi";
+
+    var response = await parasut.SalesInvoiceCreate(invoice);
+
+    if (response.IsSuccess)
+    {
+        Console.WriteLine("Invoice ID: " + response.Data.data.id);
     }
     else
     {

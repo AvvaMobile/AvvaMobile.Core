@@ -16,5 +16,10 @@
         /// Faturanın tüm detay bilgileri bu alanın içerisinde listelenir.
         /// </summary>
         public SalesInvoiceAttributes attributes { get; set; } = new SalesInvoiceAttributes();
+
+        /// <summary>
+        /// Faturanın Müşteri ve Fatura Kalemleri bilgileri bu nesne içerisinde tutulmaktadır.
+        /// </summary>
+        public Relationships relationships { get; set; } = new Relationships();
     }
 }

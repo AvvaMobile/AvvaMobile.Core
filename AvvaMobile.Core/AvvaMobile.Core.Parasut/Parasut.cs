@@ -56,9 +56,9 @@ namespace AvvaMobile.Core.Parasut
         /// </summary>
         /// <param name="request">Customer tipinde müşteri bilgilerini alır.</param>
         /// <returns>Envelope&lt;Customer&gt; tipinde yaratılmış olan müşterinin tüm bilgilerini döner.</returns>
-        public async Task<ServiceResult<Envelope<Customer>>> CustomerCreate(Customer request)
+        public async Task<ServiceResult<Envelope<Contact>>> CustomerCreate(Contact request)
         {
-            var serviceResult = new ServiceResult<Envelope<Customer>>();
+            var serviceResult = new ServiceResult<Envelope<Contact>>();
 
             await GetTokenAsync();
 
@@ -66,10 +66,10 @@ namespace AvvaMobile.Core.Parasut
             networkManager.AddContentTypeJSONHeader();
             networkManager.AddBearerToken(access_token);
 
-            var envelope = new Envelope<Customer>();
+            var envelope = new Envelope<Contact>();
             envelope.data = request;
 
-            var httpResponse = await networkManager.PostAsync<Envelope<Customer>>("/contacts", envelope);
+            var httpResponse = await networkManager.PostAsync<Envelope<Contact>>("/contacts", envelope);
 
             serviceResult.IsSuccess = httpResponse.IsSuccess;
             serviceResult.Message = httpResponse.Message;
@@ -83,9 +83,9 @@ namespace AvvaMobile.Core.Parasut
         /// </summary>
         /// <param name="request">Customer tipinde müşteri bilgilerini alır.</param>
         /// <returns>Envelope&lt;Customer&gt; tipinde yaratılmış olan müşterinin tüm bilgilerini döner.</returns>
-        public async Task<ServiceResult<Envelope<Customer>>> CustomerEdit(Customer request)
+        public async Task<ServiceResult<Envelope<Contact>>> CustomerEdit(Contact request)
         {
-            var serviceResult = new ServiceResult<Envelope<Customer>>();
+            var serviceResult = new ServiceResult<Envelope<Contact>>();
 
             if (string.IsNullOrEmpty(request.id))
             {
@@ -99,10 +99,10 @@ namespace AvvaMobile.Core.Parasut
             networkManager.AddContentTypeJSONHeader();
             networkManager.AddBearerToken(access_token);
 
-            var envelope = new Envelope<Customer>();
+            var envelope = new Envelope<Contact>();
             envelope.data = request;
 
-            var httpResponse = await networkManager.PutAsync<Envelope<Customer>>("/contacts/" + request.id, envelope);
+            var httpResponse = await networkManager.PutAsync<Envelope<Contact>>("/contacts/" + request.id, envelope);
 
             serviceResult.IsSuccess = httpResponse.IsSuccess;
             serviceResult.Message = httpResponse.Message;
@@ -116,9 +116,9 @@ namespace AvvaMobile.Core.Parasut
         /// </summary>
         /// <param name="request">CustomerListRequest tipinde filtreleme özelliklerini alır.</param>
         /// <returns>Envelope&lt;List&lt;Customer&gt;&gt; tipinde filtrelenmiş müşterileri döner.</returns>
-        public async Task<ServiceResult<Envelope<List<Customer>>>> CustomerList(CustomerListRequest request)
+        public async Task<ServiceResult<Envelope<List<Contact>>>> CustomerList(CustomerListRequest request)
         {
-            var serviceResult = new ServiceResult<Envelope<List<Customer>>>();
+            var serviceResult = new ServiceResult<Envelope<List<Contact>>>();
 
             await GetTokenAsync();
 
@@ -146,7 +146,7 @@ namespace AvvaMobile.Core.Parasut
                 parameters.Add("filter[tax_number]", (request.tax_number));
             }
 
-            var httpResponse = await networkManager.GetAsync<Envelope<List<Customer>>>("/contacts", parameters);
+            var httpResponse = await networkManager.GetAsync<Envelope<List<Contact>>>("/contacts", parameters);
 
             serviceResult.IsSuccess = httpResponse.IsSuccess;
             serviceResult.Message = httpResponse.Message;
