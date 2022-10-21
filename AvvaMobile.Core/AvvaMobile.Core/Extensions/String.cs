@@ -82,7 +82,7 @@ namespace AvvaMobile.Core.Extensions
 
             return str;
         }
-        
+
         [Obsolete("This method is deprecated. Please use 'ClearPhoneNumber' class. (Öcal Esmer)", true)]
         public static string ClearPhoneNumber_LeadingCountrCode(this string str)
         {
@@ -104,7 +104,7 @@ namespace AvvaMobile.Core.Extensions
 
             return str;
         }
-        
+
         [Obsolete("This method is deprecated. Please use 'ClearPhoneNumber' class. (Öcal Esmer)", true)]
         public static string ClearPhoneNumber_LeadingZero(this string str)
         {
@@ -126,7 +126,7 @@ namespace AvvaMobile.Core.Extensions
 
             return str;
         }
-        
+
         [Obsolete("This method is deprecated. Please use 'ClearPhoneNumber' class. (Öcal Esmer)", true)]
         public static string ClearPhoneNumber_NoLeadingNumber(this string str)
         {
@@ -263,6 +263,15 @@ namespace AvvaMobile.Core.Extensions
             }
 
             return string.Format("{0}{1}{2}", _appSettingsKeys.CDN_BaseUrl, folder, imageUrl);
+        }
+        public static string CreditCardMaskify(this string str)
+        {
+            return "**** **** **** " + str;
+        }
+
+        public static string CreditCardLast4Digits(this string str)
+        {                
+            return str.Substring(str.Length - 4);
         }
     }
 }
