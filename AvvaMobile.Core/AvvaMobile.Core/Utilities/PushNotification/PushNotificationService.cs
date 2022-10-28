@@ -63,7 +63,9 @@ namespace AvvaMobile.Core.Utilities.PushNotification
                 include_player_ids = customersString,
                 contents = new { en = message },
                 data = data,
-                headings = new { en = title }
+                headings = new { en = title },
+                ios_badgeType = "Increase",
+                ios_badgeCount = 1
             };
 
             try
