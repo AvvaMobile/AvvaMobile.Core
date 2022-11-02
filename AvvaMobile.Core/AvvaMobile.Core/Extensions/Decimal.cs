@@ -106,7 +106,7 @@ namespace AvvaMobile.Core.Extensions
         /// <returns></returns>
         public static string ToFormattedPercentage(this decimal val)
         {
-            return $"% {val.ToString("N0")}";
+            return $"% {val.ToString("N2")}";
         }
 
         /// <summary>
