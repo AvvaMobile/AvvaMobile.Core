@@ -91,5 +91,6 @@ namespace AvvaMobile.Core.Caching
 
         public string AwsAccessKeyID { get { return _cacheManager.Get("AwsAccessKeyID"); } }
         public string AwsSecretAccessKey { get { return _cacheManager.Get("AwsSecretAccessKey"); } }
+        public string AwsCDNBaseUrl { get { return _cacheManager.Get("AwsCDNBaseUrl"); } }
     }
 }

@@ -5,6 +5,6 @@ namespace Quark.Business.Common.AWS
 {
     public interface IS3Service
     {
-        Task<ServiceResult<string>> Upload(IFormFile file, string bucketName);
+        Task<ServiceResult<string>> Upload(IFormFile file, string bucketName, string folder);
     }
 }

@@ -16,12 +16,9 @@ namespace Quark.Business.Common.AWS
             _appSettingsKeys = appSettingsKeys;
         }
 
-        public async Task<ServiceResult<string>> Upload(IFormFile file, string bucketName)
+        public async Task<ServiceResult<string>> Upload(IFormFile file, string bucketName, string folder = null)
         {
-            return await Upload(file, bucketName, null);
-        }
-        public async Task<ServiceResult<string>> Upload(IFormFile file, string bucketName, string folder)
-        {
+
             var result = new ServiceResult<string>();
 
             using (var client = new AmazonS3Client(_appSettingsKeys.AwsAccessKeyID, _appSettingsKeys.AwsSecretAccessKey, RegionEndpoint.EUCentral1))
@@ -34,9 +31,16 @@ namespace Quark.Business.Common.AWS
                     var fileName = Guid.NewGuid() + extension;
                     var fullName = fileName;
 
-                    if (folder is not null)
+                    if (folder != null)
                     {
-                        fullName = folder + fileName;
+                        if (folder.Substring(folder.Length - 1) != "/")
+                        {
+                            fullName = folder + "/" + fileName;
+                        }
+                        else
+                        {
+                            fullName = folder + fileName;
+                        }
                     }
 
                     var uploadRequest = new TransferUtilityUploadRequest
@@ -48,7 +52,7 @@ namespace Quark.Business.Common.AWS
 
                     var fileTransferUtility = new TransferUtility(client);
                     await fileTransferUtility.UploadAsync(uploadRequest);
-                    result.Data = file.FileName;
+                    result.Data = fileName;
                     return result;
                 }
             }
