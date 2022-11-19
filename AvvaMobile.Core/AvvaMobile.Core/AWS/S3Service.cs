@@ -16,46 +16,63 @@ namespace Quark.Business.Common.AWS
             _appSettingsKeys = appSettingsKeys;
         }
 
-        public async Task<ServiceResult<string>> Upload(IFormFile file, string bucketName, string folder = null)
+        public async Task<S3UploadResult> Upload(IFormFile file, string bucketName, string folder = null)
         {
 
-            var result = new ServiceResult<string>();
-
-            using (var client = new AmazonS3Client(_appSettingsKeys.AwsAccessKeyID, _appSettingsKeys.AwsSecretAccessKey, RegionEndpoint.EUCentral1))
+            var result = new S3UploadResult();
+            try
             {
-                using (var newMemoryStream = new MemoryStream())
+                using (var client = new AmazonS3Client(_appSettingsKeys.AwsAccessKeyID, _appSettingsKeys.AwsSecretAccessKey, RegionEndpoint.EUCentral1))
                 {
-                    file.CopyTo(newMemoryStream);
-                    var ext = Path.GetExtension(file.FileName);
-                    var extension = ext.ToLower();
-                    var fileName = Guid.NewGuid() + extension;
-                    var fullName = fileName;
-
-                    if (folder != null)
+                    using (var newMemoryStream = new MemoryStream())
                     {
-                        if (folder.Substring(folder.Length - 1) != "/")
+                        file.CopyTo(newMemoryStream);
+                        var ext = Path.GetExtension(file.FileName);
+                        var extension = ext.ToLower();
+                        var fileName = Guid.NewGuid() + extension;
+                        var fullName = fileName;
+
+                        if (folder != null)
                         {
-                            fullName = folder + "/" + fileName;
+                            if (folder.Substring(folder.Length - 1) != "/")
+                            {
+                                fullName = folder + "/" + fileName;
+                            }
+                            else
+                            {
+                                fullName = folder + fileName;
+                            }
                         }
-                        else
+
+                        var uploadRequest = new TransferUtilityUploadRequest
                         {
-                            fullName = folder + fileName;
-                        }
+                            InputStream = newMemoryStream,
+                            Key = fullName,
+                            BucketName = bucketName,
+                        };
+
+                        var fileTransferUtility = new TransferUtility(client);
+                        await fileTransferUtility.UploadAsync(uploadRequest);
+
+                        result.IsSuccess = true;
+                        result.FileName = fileName;
+                        return result;
                     }
-
-                    var uploadRequest = new TransferUtilityUploadRequest
-                    {
-                        InputStream = newMemoryStream,
-                        Key = fullName,
-                        BucketName = bucketName,
-                    };
-
-                    var fileTransferUtility = new TransferUtility(client);
-                    await fileTransferUtility.UploadAsync(uploadRequest);
-                    result.Data = fileName;
-                    return result;
                 }
             }
+            catch (Exception ex)
+            {
+                result.IsSuccess = false;
+                result.Messsage = ex.Message;
+                return result;
+            }
+           
         }
+    }
+    public class S3UploadResult
+    {
+        public bool IsSuccess { get; set; } = true;
+        public string FileName { get; set; }
+        public string Messsage { get; set; }
     }
 }
