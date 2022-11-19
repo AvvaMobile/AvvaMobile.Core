@@ -87,5 +87,9 @@ namespace AvvaMobile.Core.Caching
         public string CDN_BaseUrl { get { return _cacheManager.Get("CDN_BaseUrl"); } }
         public string CDN_UsersImageFolder { get { return _cacheManager.Get("CDN_UsersImageFolder"); } }
         public string CDN_CustomersImageFolder { get { return _cacheManager.Get("CDN_CustomersImageFolder"); } }
+
+
+        public string AwsAccessKeyID { get { return _cacheManager.Get("AwsAccessKeyID"); } }
+        public string AwsSecretAccessKey { get { return _cacheManager.Get("AwsSecretAccessKey"); } }
     }
 }
