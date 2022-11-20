@@ -16,7 +16,7 @@ namespace Quark.Business.Common.AWS
             _appSettingsKeys = appSettingsKeys;
         }
 
-        public async Task<S3UploadResult> Upload(IFormFile file, string bucketName, string folder = null)
+        public async Task<S3UploadResult> Upload(IFormFile file, string bucketName)
         {
 
             var result = new S3UploadResult();
@@ -31,18 +31,6 @@ namespace Quark.Business.Common.AWS
                         var extension = ext.ToLower();
                         var fileName = Guid.NewGuid() + extension;
                         var fullName = fileName;
-
-                        if (folder != null)
-                        {
-                            if (folder.Substring(folder.Length - 1) != "/")
-                            {
-                                fullName = folder + "/" + fileName;
-                            }
-                            else
-                            {
-                                fullName = folder + fileName;
-                            }
-                        }
 
                         var uploadRequest = new TransferUtilityUploadRequest
                         {
