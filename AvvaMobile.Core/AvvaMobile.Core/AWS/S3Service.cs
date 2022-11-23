@@ -5,7 +5,7 @@ using AvvaMobile.Core.Business;
 using AvvaMobile.Core.Caching;
 using Microsoft.AspNetCore.Http;
 
-namespace Quark.Business.Common.AWS
+namespace AvvaMobile.Core.AWS
 {
     public class S3Service : IS3Service
     {

@@ -1,7 +1,7 @@
 ﻿using AvvaMobile.Core.Business;
 using Microsoft.AspNetCore.Http;
 
-namespace Quark.Business.Common.AWS
+namespace AvvaMobile.Core.AWS
 {
     public interface IS3Service
     {
