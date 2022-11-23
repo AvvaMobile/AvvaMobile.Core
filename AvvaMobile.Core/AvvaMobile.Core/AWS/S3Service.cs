@@ -28,20 +28,18 @@ namespace Quark.Business.Common.AWS
                     {
                         file.CopyTo(newMemoryStream);
                         var ext = Path.GetExtension(file.FileName);
-                        var extension = ext.ToLower();
-                        var fileName = Guid.NewGuid() + extension;
-                        var fullName = fileName;
+                        var fileName = Guid.NewGuid() + ext.ToLower();                      
 
                         var uploadRequest = new TransferUtilityUploadRequest
                         {
                             InputStream = newMemoryStream,
-                            Key = fullName,
+                            Key = fileName,
                             BucketName = bucketName,
                         };
 
                         var fileTransferUtility = new TransferUtility(client);
                         await fileTransferUtility.UploadAsync(uploadRequest);
-
+                        
                         result.IsSuccess = true;
                         result.FileName = fileName;
                         return result;
