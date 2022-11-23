@@ -264,13 +264,14 @@ namespace AvvaMobile.Core.Extensions
 
             return string.Format("{0}{1}{2}", _appSettingsKeys.CDN_BaseUrl, folder, imageUrl);
         }
-        public static string PrepareAWSUrl(this string imageUrl, string bucketName)
+        public static string PrepareS3Url(this string imageUrl, string bucketName)
         {
             if (string.IsNullOrEmpty(imageUrl))
             {
                 return imageUrl;
             }           
-            return string.Format("{0}{1}{2}", _appSettingsKeys.AwsCDNBaseUrl, bucketName, imageUrl);
+            return string.Format(_appSettingsKeys.S3CDNBaseUrl, bucketName, imageUrl);
+            //                   https://{0}.s3.eu-central-1.amazonaws.com/{1}
         }
         public static string CreditCardMaskify(this string str)
         {
