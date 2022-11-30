@@ -82,7 +82,7 @@ namespace AvvaMobile.Core.Utilities.Mail
                 mail.Priority = MailPriority.High;
                 mail.BodyEncoding = Encoding.UTF8;
 
-                smtp.SendAsync(mail, string.Empty);
+                smtp.Send(mail);
 
                 return new EmailResult { IsSuccess = true };
             }
