@@ -21,5 +21,19 @@
             var random = new Random();
             return random.Next(min, max);
         }
+
+        public static string CreateAlphanumericCode(int length = 14)
+        {
+
+            var validChars = "ABCDEFGHJKLMNOPQRSTUVWXYZ0123456789";
+            var random = new Random();
+
+            var chars = new char[length];
+            for (var i = 0; i < length; i++)
+            {
+                chars[i] = validChars[random.Next(0, validChars.Length)];
+            }
+            return new string(chars);
+        }
     }
 }
