@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Globalization;
 
 namespace AvvaMobile.Core.Extensions
@@ -48,5 +49,53 @@ namespace AvvaMobile.Core.Extensions
             }
             return (DateTime.MinValue, DateTime.MaxValue);
         }
+
+        public static DeserializedDateTime ToDeserializedDateTime(this DateTime dateTime)
+        {
+            return dateTime.ToDeserializedDateTime("ddd", "MMM", true, true);
+        }
+
+        public static DeserializedDateTime ToDeserializedDateTime(
+            this DateTime dateTime,
+            string dayFormat = "ddd",
+            string monthFormat = "MMM",
+            bool isMonthUpper = true,
+            bool isDayUpper = true)
+        {
+            var deserializedDateTime = new DeserializedDateTime();
+
+            deserializedDateTime.Day = dateTime.Day.ToString("D2");
+            deserializedDateTime.DayName = dateTime.ToString(dayFormat);
+            deserializedDateTime.Month = dateTime.Month.ToString("D2");
+            deserializedDateTime.MonthName = dateTime.ToString(monthFormat);
+            deserializedDateTime.Time = dateTime.ToShortTimeString();
+            deserializedDateTime.Hour = dateTime.Hour.ToString();
+            deserializedDateTime.Minute = dateTime.Minute.ToString();
+            deserializedDateTime.Year = dateTime.Year.ToString();
+
+            if (isDayUpper)
+            {
+                deserializedDateTime.DayName = deserializedDateTime.DayName.ToUpper();
+            }
+
+            if (isMonthUpper)
+            {
+                deserializedDateTime.MonthName = deserializedDateTime.MonthName.ToUpper();
+            }
+
+            return deserializedDateTime;
+        }
+    }
+
+    public class DeserializedDateTime
+    {
+        public string Day { get; set; }
+        public string DayName { get; set; }
+        public string Month { get; set; }
+        public string MonthName { get; set; }
+        public string Time { get; set; }
+        public string Hour { get; set; }
+        public string Minute { get; set; }
+        public string Year { get; set; }
     }
 }
