@@ -72,6 +72,7 @@ namespace AvvaMobile.Core.Caching
         public string SMTP_Url { get { return _cacheManager.Get("SMTP_Url"); } }
         public string SMTP_UseSSL { get { return _cacheManager.Get("SMTP_UseSSL"); } }
         public string SMTP_Sender { get { return _cacheManager.Get("SMTP_Sender"); } }
+        public string SMTP_SenderDisplayName { get { return _cacheManager.Get("SMTP_SenderDisplayName"); } }
         public string SMTP_Username { get { return _cacheManager.Get("SMTP_Username"); } }
         public string SMTP_Password { get { return _cacheManager.Get("SMTP_Password"); } }
         public string SMTP_Port { get { return _cacheManager.Get("SMTP_Port"); } }

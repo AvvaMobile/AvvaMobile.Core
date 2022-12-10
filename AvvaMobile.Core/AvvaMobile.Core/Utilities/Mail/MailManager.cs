@@ -9,16 +9,17 @@ namespace AvvaMobile.Core.Utilities.Mail
 {
     public class MailManager : IMailService
     {
-
         private IHostingEnvironment _hostingEnvironment;
         private readonly AppSettingsKeys _appSettingsKeys;
         private readonly IHttpContextAccessor _httpContext;
+
         public MailManager(IHostingEnvironment hostingEnvironment, AppSettingsKeys appSettingsKeys, IHttpContextAccessor httpContext)
         {
             _hostingEnvironment = hostingEnvironment;
             _appSettingsKeys = appSettingsKeys;
             _httpContext = httpContext;
         }
+
         public async Task<EmailResult> Send(string to, string subject, string filePath, Dictionary<string, string> parameterList = null, AttachmentCollection attachments = null)
         {
             return await Send(new List<string> { to }, subject, filePath, parameterList, attachments);
@@ -33,6 +34,7 @@ namespace AvvaMobile.Core.Utilities.Mail
                 var smtpServer = _appSettingsKeys.SMTP_Url;
                 var smptPort = _appSettingsKeys.SMTP_Port;
                 var smtpSender = _appSettingsKeys.SMTP_Sender;
+                var smtpSenderDisplayName = _appSettingsKeys.SMTP_SenderDisplayName;
 
 
                 var mail = new MailMessage { Subject = subject };
@@ -78,7 +80,7 @@ namespace AvvaMobile.Core.Utilities.Mail
                     mail.To.Add(item);
                 }
 
-                mail.From = new MailAddress(smtpSender);
+                mail.From = new MailAddress(smtpSender, smtpSenderDisplayName);
                 mail.Priority = MailPriority.High;
                 mail.BodyEncoding = Encoding.UTF8;
 
@@ -106,6 +108,7 @@ namespace AvvaMobile.Core.Utilities.Mail
             return body;
         }
     }
+
     public class EmailResult
     {
         public bool IsSuccess { get; set; }
