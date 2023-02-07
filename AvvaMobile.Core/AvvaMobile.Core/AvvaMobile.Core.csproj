@@ -1,7 +1,7 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Company>Avva Mobile Enterprise Solutions</Company>
@@ -13,7 +13,7 @@
 		<RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
 		<RunAnalyzersDuringLiveAnalysis>False</RunAnalyzersDuringLiveAnalysis>
 		<EnableNETAnalyzers>False</EnableNETAnalyzers>
-		<Version>1.0.75</Version>
+		<Version>1.0.76</Version>
 		<PackageIcon>avvamobile.png</PackageIcon>
 		<Description>This package is build for Avva Mobile developers to make their solutions easy to develop.</Description>
 		<Copyright>Avva Mobile Enterprise Solutions</Copyright>
@@ -26,13 +26,13 @@
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="AvvaMobile.Core.NetworkManager" Version="1.0.11" />
-		<PackageReference Include="AWSSDK.S3" Version="3.7.101.21" />
+		<PackageReference Include="AWSSDK.S3" Version="3.7.103.3" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.10" />
-		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0.1" />
-		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.24.0" />
-		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.24.0" />
-		<PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.20" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.2" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="7.0.0" />
+		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.26.1" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.26.1" />
+		<PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.25" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Update="avvamobile.png">
