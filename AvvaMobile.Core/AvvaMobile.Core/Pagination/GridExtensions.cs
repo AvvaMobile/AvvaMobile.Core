@@ -1,4 +1,5 @@
-﻿using AvvaMobile.Core.DataTable;
+﻿using Amazon.Runtime.Internal;
+using AvvaMobile.Core.DataTable;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 
@@ -90,7 +91,7 @@ namespace AvvaMobile.Core.Pagination
 
 
             tableRequest.RecordsTotal = list.Count();
-
+            tableRequest.Skip = tableRequest.PageSize * (tableRequest.Page - 1);
             list = list.Skip(tableRequest.Skip).Take(tableRequest.PageSize);
 
             tableRequest.RecordsFiltered = list.Count();
