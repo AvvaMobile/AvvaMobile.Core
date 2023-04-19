@@ -62,7 +62,6 @@ namespace AvvaMobile.Core.Caching
         public string Common_CMSAppUrl { get { return _cacheManager.Get("Common_CMSAppUrl"); } }
         public string Common_CookieName { get { return _cacheManager.Get("Common_CookieName"); } }
 
-
         public string CDN_FTP_Url { get { return _cacheManager.Get("CDN_FTP_Url"); } }
         public string CDN_FTP_UseSSL { get { return _cacheManager.Get("CDN_FTP_UseSSL"); } }
         public string CDN_FTP_Username { get { return _cacheManager.Get("CDN_FTP_Username"); } }
@@ -89,9 +88,15 @@ namespace AvvaMobile.Core.Caching
         public string CDN_UsersImageFolder { get { return _cacheManager.Get("CDN_UsersImageFolder"); } }
         public string CDN_CustomersImageFolder { get { return _cacheManager.Get("CDN_CustomersImageFolder"); } }
 
-
         public string AwsAccessKeyID { get { return _cacheManager.Get("AwsAccessKeyID"); } }
         public string AwsSecretAccessKey { get { return _cacheManager.Get("AwsSecretAccessKey"); } }
         public string S3CDNBaseUrl { get { return _cacheManager.Get("S3CDNBaseUrl"); } }
+
+        public string Parasut_ProductID { get { return _cacheManager.Get("Parasut_ProductID"); } }
+        public string Parasut_CompanyID { get { return _cacheManager.Get("Parasut_CompanyID"); } }
+        public string Parasut_Username { get { return _cacheManager.Get("Parasut_Username"); } }
+        public string Parasut_Password { get { return _cacheManager.Get("Parasut_Password"); } }
+        public string Parasut_ClientID { get { return _cacheManager.Get("Parasut_ClientID"); } }
+        public string Parasut_ClientSecret { get { return _cacheManager.Get("Parasut_ClientSecret"); } }
     }
 }
