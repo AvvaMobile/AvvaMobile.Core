@@ -61,6 +61,7 @@ namespace AvvaMobile.Core.Caching
         public string Common_AppName { get { return _cacheManager.Get("Common_AppName"); } }
         public string Common_CMSAppUrl { get { return _cacheManager.Get("Common_CMSAppUrl"); } }
         public string Common_CookieName { get { return _cacheManager.Get("Common_CookieName"); } }
+        public string Common_NoImageUrl { get { return _cacheManager.Get("Common_NoImageUrl"); } }
 
         public string CDN_FTP_Url { get { return _cacheManager.Get("CDN_FTP_Url"); } }
         public string CDN_FTP_UseSSL { get { return _cacheManager.Get("CDN_FTP_UseSSL"); } }
@@ -98,5 +99,6 @@ namespace AvvaMobile.Core.Caching
         public string Parasut_Password { get { return _cacheManager.Get("Parasut_Password"); } }
         public string Parasut_ClientID { get { return _cacheManager.Get("Parasut_ClientID"); } }
         public string Parasut_ClientSecret { get { return _cacheManager.Get("Parasut_ClientSecret"); } }
+        public string Parasut_AccountID { get { return _cacheManager.Get("Parasut_AccountID"); } }
     }
 }
