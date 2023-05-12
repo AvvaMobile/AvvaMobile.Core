@@ -1,5 +1,7 @@
 ﻿using Amazon.Runtime.Internal;
 using AvvaMobile.Core.DataTable;
+using LinqKit;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 
@@ -54,41 +56,38 @@ namespace AvvaMobile.Core.Pagination
             {
                 list = list.OrderBy(tableRequest.SortColumn + " " + tableRequest.SortColumnDir);
             }
-            if (!tableRequest.SearchItems.Contains(null))
-            {
-                foreach (var item in tableRequest.SearchItems)
-                {
-                    if (DateTime.TryParse(item.SearchValue.ToString(), out var dt))
-                    {
-                        list = list.Where($"{item.SearchColumn} = @0", dt);
-                        continue;
-                    }
-                    if (bool.TryParse(item.SearchValue.ToString(), out var bl))
-                    {
-                        list = list.Where($"{item.SearchColumn} = @0", bl);
-                        continue;
-                    }
-                    if (int.TryParse(item.SearchValue.ToString(), out var s))
-                    {
-                        list = list.Where($"{item.SearchColumn} = @0", s);
-                        continue;
-                    }
-                    if (double.TryParse(item.SearchValue.ToString(), out var db))
-                    {
-                        list = list.Where($"{item.SearchColumn} = @0", db);
-                        continue;
-                    }
-                    if (item.SearchValue.ToString() == "null")
-                    {
-                        list = list.Where($"{item.SearchColumn} = null");
-                        continue;
-                    }
 
-                    var where = $"{item.SearchColumn}.Contains(@0)";
-                    list = list.Where(where, item.SearchValue);
+            var predicate = PredicateBuilder.New<T>(true);
+
+            foreach (var item in tableRequest.SearchItems)
+            {
+                if (DateTime.TryParse(item.SearchValue.ToString(), out var dt))
+                {
+                    predicate = predicate.Or(x => EF.Property<DateTime>(x, item.SearchColumn).ToString().Contains(item.SearchValue.ToString()));
+                }
+                else if (bool.TryParse(item.SearchValue.ToString(), out var bl))
+                {
+                    predicate = predicate.Or(x => EF.Property<bool>(x, item.SearchColumn).ToString().Contains(item.SearchValue.ToString()));
+                }
+                else if (int.TryParse(item.SearchValue.ToString(), out var s))
+                {
+                    predicate = predicate.Or(x => EF.Property<int>(x, item.SearchColumn).ToString().Contains(item.SearchValue.ToString()));
+                }
+                else if (double.TryParse(item.SearchValue.ToString(), out var db))
+                {
+                    predicate = predicate.Or(x => EF.Property<double>(x, item.SearchColumn).ToString().Contains(item.SearchValue.ToString()));
+                }
+                else if (item.SearchValue.ToString() == "null")
+                {
+                    predicate = predicate.Or(x => EF.Property<object>(x, item.SearchColumn) == null);
+                }
+                else
+                {
+                    predicate = predicate.Or(x => EF.Property<string>(x, item.SearchColumn).Contains(item.SearchValue.ToString()));
                 }
             }
 
+            list = list.Where(predicate);
 
             tableRequest.RecordsTotal = list.Count();
             tableRequest.Skip = tableRequest.PageSize * (tableRequest.Page - 1);
