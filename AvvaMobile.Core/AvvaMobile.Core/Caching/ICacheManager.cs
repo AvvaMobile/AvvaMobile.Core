@@ -1,17 +1,25 @@
+using Microsoft.AspNetCore.Mvc.Rendering;
+
 namespace AvvaMobile.Core.Caching;
 
 public interface ICacheManager
 {
-    public T Get<T>(string key);
+    public Task<bool> IsExists(string key);
     
-    public string Get(string key);
+    public Task<T> Get<T>(string key);
+    
+    public Task<string> Get(string key);
 
-    public void Set(string key, object value);
+    public Task<bool> Set(string key, object value);
     
-    public void Set(string key, object value, TimeSpan expiry);
+    public Task<bool> Set(string key, object value, TimeSpan expiry);
     
+    public Task<List<SelectListItem>> Get_SelectListItems(string key);
     
-    
+    public Task<bool> Set_SelectListItems(string key, List<SelectListItem> value);
+
+
+
     [Obsolete("This method is obsolete. Use Set method with timespan parameters instead.")]
     public void SetHours(string key, object data, int hours);
     

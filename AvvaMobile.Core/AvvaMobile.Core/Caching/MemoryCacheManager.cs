@@ -1,4 +1,5 @@
 ﻿using AvvaMobile.Core.Extensions;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace AvvaMobile.Core.Caching;
@@ -12,26 +13,44 @@ public class MemoryCacheManager : ICacheManager
         _cache = cache;
     }
 
-    public T Get<T>(string key)
+    public Task<bool> IsExists(string key)
     {
-        return _cache.Get<T>(key);
+        return Task.FromResult(_cache.TryGetValue(key, out _));
     }
 
-    public string Get(string key)
+    public Task<T> Get<T>(string key)
     {
-        return _cache.Get(key).ToStringData();
+        return Task.FromResult(_cache.Get<T>(key));
     }
-    
-    public void Set(string key, object value)
+
+    public Task<string> Get(string key)
+    {
+        return Task.FromResult(_cache.Get(key).ToStringData());
+    }
+
+    public Task<bool> Set(string key, object value)
     {
         _cache.Set(key, value);
+        return Task.FromResult(true);
     }
-    
-    public void Set(string key, object value, TimeSpan expiry)
+
+    public Task<bool> Set(string key, object value, TimeSpan expiry)
     {
         _cache.Set(key, value, expiry);
+        return Task.FromResult(true);
     }
-    
+
+    public Task<List<SelectListItem>> Get_SelectListItems(string key)
+    {
+        return Task.FromResult(_cache.Get<List<SelectListItem>>(key));
+    }
+
+    public Task<bool> Set_SelectListItems(string key, List<SelectListItem> value)
+    {
+        _cache.Set(key, value);
+        return Task.FromResult(true);
+    }
+
 
     [Obsolete("This method is obsolete. Use Set method with timespan parameters instead.")]
     public void SetHours(string key, object data, int hours)

@@ -1,4 +1,5 @@
 ﻿using AvvaMobile.Core.Redis;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AvvaMobile.Core.Caching;
 
@@ -11,24 +12,39 @@ public class RedisCacheManager : ICacheManager
         _cache = cache;
     }
 
-    public T Get<T>(string key)
+    public async Task<bool> IsExists(string key)
     {
-        return _cache.Get_Deserialized<T>(key).Result;
+        return await _cache.IsExists(key);
+    }
+    
+    public async Task<T> Get<T>(string key)
+    {
+        return await _cache.Get_Deserialized<T>(key);
     }
 
-    public string Get(string key)
+    public async Task<string> Get(string key)
     {
-        return _cache.Get_String(key).Result;
+        return await _cache.Get_String(key);
     }
     
-    public void Set(string key, object value)
+    public async Task<bool> Set(string key, object value)
     {
-        _cache.Set(key, value.ToString());
+        return await _cache.Set(key, value.ToString());
     }
     
-    public void Set(string key, object value, TimeSpan expiry)
+    public async Task<bool> Set(string key, object value, TimeSpan expiry)
     {
-        _cache.Set(key, value.ToString(), expiry);
+        return await _cache.Set(key, value.ToString(), expiry);
+    }
+    
+    public async Task<List<SelectListItem>> Get_SelectListItems(string key)
+    {
+        return await _cache.Get_SelectListItems(key);
+    }
+    
+    public async Task<bool> Set_SelectListItems(string key, List<SelectListItem> value)
+    {
+        return await _cache.Set_SelectListItems(key, value);
     }
 
     [Obsolete("This method is obsolete. Use Set method with timespan parameters instead.")]
