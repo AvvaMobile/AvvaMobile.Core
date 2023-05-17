@@ -9,16 +9,15 @@ namespace AvvaMobile.Core
     {
         public void Message(ServiceResult response)
         {
-            if (response.Message.IsNotNull())
+            if (response.Message.IsNullOrEmtpy()) return;
+
+            if (response.IsSuccess)
             {
-                if (response.IsSuccess)
-                {
-                    Success(response.Message);
-                }
-                else
-                {
-                    Error(response.Message);
-                }
+                Success(response.Message);
+            }
+            else
+            {
+                Error(response.Message);
             }
         }
 
@@ -39,17 +38,12 @@ namespace AvvaMobile.Core
 
         public int CurrentUserID
         {
-            get
-            {
-                return int.Parse(User.Identities.FirstOrDefault(u => u.IsAuthenticated && u.HasClaim(c => c.Type == ClaimTypes.NameIdentifier))?.FindFirst(ClaimTypes.NameIdentifier).Value);
-            }
+            get { return int.Parse(User.Identities.FirstOrDefault(u => u.IsAuthenticated && u.HasClaim(c => c.Type == ClaimTypes.NameIdentifier))?.FindFirst(ClaimTypes.NameIdentifier).Value); }
         }
+
         public string CurrentUserName
         {
-            get
-            {
-                return User.Identities.FirstOrDefault(u => u.IsAuthenticated && u.HasClaim(c => c.Type == ClaimTypes.Name))?.FindFirst(ClaimTypes.Name).Value;
-            }
+            get { return User.Identities.FirstOrDefault(u => u.IsAuthenticated && u.HasClaim(c => c.Type == ClaimTypes.Name))?.FindFirst(ClaimTypes.Name).Value; }
         }
 
         public bool HasRight(string right)
