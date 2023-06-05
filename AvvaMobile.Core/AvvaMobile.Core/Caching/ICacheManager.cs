@@ -17,6 +17,9 @@ public interface ICacheManager
     public Task<List<SelectListItem>> Get_SelectListItems(string key);
     
     public Task<bool> Set_SelectListItems(string key, List<SelectListItem> value);
+    
+    public Task Remove(string key);
+    public Task Clear();
 
 
 

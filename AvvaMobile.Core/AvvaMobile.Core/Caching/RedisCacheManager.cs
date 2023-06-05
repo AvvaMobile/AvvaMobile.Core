@@ -53,6 +53,17 @@ public class RedisCacheManager : ICacheManager
         return await _cache.Set_SelectListItems(key, value);
     }
 
+    public async Task Remove(string key)
+    {
+        await _cache.Remove(key);
+    }
+
+    public Task Clear()
+    {
+        _cache.ClearAll();
+        return Task.CompletedTask;
+    }
+
     [Obsolete("This method is obsolete. Use Set method with timespan parameters instead.")]
     public void SetHours(string key, object data, int hours)
     {

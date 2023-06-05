@@ -50,6 +50,17 @@ public class MemoryCacheManager : ICacheManager
         _cache.Set(key, value);
         return Task.FromResult(true);
     }
+    
+    public Task Remove(string key)
+    {
+        _cache.Remove(key);
+        return Task.CompletedTask;
+    }
+    
+    public Task Clear()
+    {
+        return Task.CompletedTask;
+    }
 
 
     [Obsolete("This method is obsolete. Use Set method with timespan parameters instead.")]
