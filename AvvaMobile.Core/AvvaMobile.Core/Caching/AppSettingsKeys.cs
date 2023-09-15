@@ -53,4 +53,9 @@ public class AppSettingsKeys
     public string Parasut_ClientID => _cacheManager.Get("Parasut_ClientID").Result;
     public string Parasut_ClientSecret => _cacheManager.Get("Parasut_ClientSecret").Result;
     public string Parasut_AccountID => _cacheManager.Get("Parasut_AccountID").Result;
+
+    public string ElasticIndex => _cacheManager.Get("ElasticIndex").Result;
+    public string ElasticPassword => _cacheManager.Get("ElasticPassword").Result;
+    public string ElasticUrl => _cacheManager.Get("ElasticUrl").Result;
+    public string ElasticUserName => _cacheManager.Get("ElasticUserName").Result;
 }
