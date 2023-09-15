@@ -10,6 +10,8 @@ public class AppSettingsKeys
     }
 
     public string Common_AppName => _cacheManager.Get("Common_AppName").Result;
+    public string Common_ClientName => _cacheManager.Get("Common_ClientName").Result;
+    public string Common_ClientWebSite => _cacheManager.Get("Common_ClientWebSite").Result;
     public string Common_CMSAppUrl => _cacheManager.Get("Common_CMSAppUrl").Result;
     public string Common_CookieName => _cacheManager.Get("Common_CookieName").Result;
     public string Common_NoImageUrl => _cacheManager.Get("Common_NoImageUrl").Result;
@@ -35,7 +37,6 @@ public class AppSettingsKeys
     public string SMS_Username => _cacheManager.Get("SMS_Username").Result;
     public string SMS_Password => _cacheManager.Get("SMS_Password").Result;
     public string SMS_Sender => _cacheManager.Get("SMS_Sender").Result;
-    
 
     public string CDN_BaseUrl => _cacheManager.Get("CDN_BaseUrl").Result;
     public string CDN_UsersImageFolder => _cacheManager.Get("CDN_UsersImageFolder").Result;
@@ -45,7 +46,6 @@ public class AppSettingsKeys
     public string AwsSecretAccessKey => _cacheManager.Get("AwsSecretAccessKey").Result;
     public string S3CDNBaseUrl => _cacheManager.Get("S3CDNBaseUrl").Result;
     
-
     public string Parasut_ProductID => _cacheManager.Get("Parasut_ProductID").Result;
     public string Parasut_CompanyID => _cacheManager.Get("Parasut_CompanyID").Result;
     public string Parasut_Username => _cacheManager.Get("Parasut_Username").Result;
