@@ -10,11 +10,9 @@ public class AppSettingsKeys
     }
 
     public string Common_AppName => _cacheManager.Get("Common_AppName").Result;
+    public string Common_CMSAppUrl => _cacheManager.Get("Common_CMSAppUrl").Result;
     public string Common_ClientName => _cacheManager.Get("Common_ClientName").Result;
     public string Common_ClientWebSite => _cacheManager.Get("Common_ClientWebSite").Result;
-    public string Common_CMSAppUrl => _cacheManager.Get("Common_CMSAppUrl").Result;
-    public string Common_CookieName => _cacheManager.Get("Common_CookieName").Result;
-    public string Common_NoImageUrl => _cacheManager.Get("Common_NoImageUrl").Result;
 
     public string CDN_FTP_Url => _cacheManager.Get("CDN_FTP_Url").Result;
     public string CDN_FTP_UseSSL => _cacheManager.Get("CDN_FTP_UseSSL").Result;
@@ -58,4 +56,8 @@ public class AppSettingsKeys
     public string ElasticPassword => _cacheManager.Get("ElasticPassword").Result;
     public string ElasticUrl => _cacheManager.Get("ElasticUrl").Result;
     public string ElasticUserName => _cacheManager.Get("ElasticUserName").Result;
+    
+    public string MobileApp_GooglePlayUrl => _cacheManager.Get("MobileApp_GooglePlayUrl").Result;
+    public string MobileApp_AppStoreUrl => _cacheManager.Get("MobileApp_AppStoreUrl").Result;
+    public string MobileApp_AppGalleryUrl => _cacheManager.Get("MobileApp_AppGalleryUrl").Result;
 }
