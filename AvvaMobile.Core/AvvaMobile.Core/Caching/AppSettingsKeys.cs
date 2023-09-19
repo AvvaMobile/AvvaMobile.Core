@@ -60,4 +60,15 @@ public class AppSettingsKeys
     public string MobileApp_GooglePlayUrl => _cacheManager.Get("MobileApp_GooglePlayUrl").Result;
     public string MobileApp_AppStoreUrl => _cacheManager.Get("MobileApp_AppStoreUrl").Result;
     public string MobileApp_AppGalleryUrl => _cacheManager.Get("MobileApp_AppGalleryUrl").Result;
+    public string MobileApp_iPhoneVersion => _cacheManager.Get("MobileApp_iPhoneVersion").Result;
+    public string MobileApp_iPadVersion => _cacheManager.Get("MobileApp_iPadVersion").Result;
+    public string MobileApp_VersionVersion => _cacheManager.Get("MobileApp_VersionVersion").Result;
+    public string MobileApp_HuaweiVersion => _cacheManager.Get("MobileApp_HuaweiVersion").Result;
+    
+    public string Social_Facebook => _cacheManager.Get("Social_Facebook").Result;
+    public string Social_Instagram => _cacheManager.Get("Social_Instagram").Result;
+    public string Social_Twitter => _cacheManager.Get("Social_Twitter").Result;
+    public string Social_Linkedin => _cacheManager.Get("Social_Linkedin").Result;
+    public string Social_Youtube => _cacheManager.Get("Social_Youtube").Result;
+    public string Social_TikTok => _cacheManager.Get("Social_TikTok").Result;
 }
