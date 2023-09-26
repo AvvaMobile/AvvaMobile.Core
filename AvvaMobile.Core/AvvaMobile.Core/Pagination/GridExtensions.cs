@@ -9,6 +9,7 @@ namespace AvvaMobile.Core.Pagination
 {
     public static class GridExtensions
     {
+        [Obsolete("This Method is Deprecated")]
         public static IQueryable<T> GridFilter<T>(this IQueryable<T> list, BaseDataTableRequest tableRequest)
         {
             if (!(string.IsNullOrEmpty(tableRequest.SortColumn) && string.IsNullOrEmpty(tableRequest.SortColumnDirection)))
