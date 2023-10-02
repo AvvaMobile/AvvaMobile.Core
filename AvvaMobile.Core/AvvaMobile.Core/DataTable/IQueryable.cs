@@ -11,14 +11,13 @@ namespace AvvaMobile.Core.DataTable
     {
         public static IQueryable<TSource> SortSkipTake<TSource>(this IQueryable<TSource> source, BaseDataTableRequest tableRequest)
         {
-            if (!(string.IsNullOrEmpty(tableRequest.SortColumn) &&
-                   string.IsNullOrEmpty(tableRequest.SortColumnDirection)))
+            if (!(string.IsNullOrEmpty(tableRequest.SortColumn) && string.IsNullOrEmpty(tableRequest.SortColumnDirection)))
             {
                 source = source
                     .OrderBy(tableRequest.SortColumn + " " + tableRequest.SortColumnDirection);
             }
 
-            source = source.Skip(tableRequest.Skip).Take(tableRequest.PageSize ?? 20);
+            source = source.Skip(tableRequest.Skip).Take(tableRequest.PageSize);
 
             return source;
         }

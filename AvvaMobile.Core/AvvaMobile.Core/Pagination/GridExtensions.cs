@@ -9,7 +9,7 @@ namespace AvvaMobile.Core.Pagination
 {
     public static class GridExtensions
     {
-        [Obsolete("This Method is Deprecated")]
+        [Obsolete("This Method is Deprecated.Please use SortSkipTake method. Öcal Esmer 02.10.2023")]
         public static IQueryable<T> GridFilter<T>(this IQueryable<T> list, BaseDataTableRequest tableRequest)
         {
             if (!(string.IsNullOrEmpty(tableRequest.SortColumn) && string.IsNullOrEmpty(tableRequest.SortColumnDirection)))
@@ -47,7 +47,7 @@ namespace AvvaMobile.Core.Pagination
                 }
             }
 
-            list = list.Skip(tableRequest.Skip).Take(tableRequest.PageSize ?? 20);
+            list = list.Skip(tableRequest.Skip).Take(tableRequest.PageSize);
 
             return list;
         }
