@@ -9,7 +9,7 @@ namespace AvvaMobile.Core.DataTable
 {
     public static class IQueryable
     {
-        public static IQueryable<TSource> Sort<TSource>(this IQueryable<TSource> source, BaseDataTableRequest tableRequest)
+        public static IQueryable<TSource> SortSkipTake<TSource>(this IQueryable<TSource> source, BaseDataTableRequest tableRequest)
         {
             if (!(string.IsNullOrEmpty(tableRequest.SortColumn) &&
                    string.IsNullOrEmpty(tableRequest.SortColumnDirection)))
@@ -17,6 +17,8 @@ namespace AvvaMobile.Core.DataTable
                 source = source
                     .OrderBy(tableRequest.SortColumn + " " + tableRequest.SortColumnDirection);
             }
+
+            source = source.Skip(tableRequest.Skip).Take(tableRequest.PageSize ?? 20);
 
             return source;
         }
