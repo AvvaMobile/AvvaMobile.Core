@@ -21,5 +21,16 @@ namespace AvvaMobile.Core.DataTable
 
             return source;
         }
+
+        public static IQueryable<TSource> Search<TSource>(this IQueryable<TSource> query, string keyword)
+        {
+            var searchableProperties = query.ElementType.GetProperties().Where(x => x.PropertyType.Name.Equals(nameof(String)));
+
+            var predicate = string.Join(" || ", searchableProperties.Select(x => $"{x.Name}.Contains(@0)"));
+
+            query = query.Where(predicate, keyword);
+
+            return query;
+        }
     }
 }
