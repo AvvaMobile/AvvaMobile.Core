@@ -29,7 +29,6 @@
 		<PackageReference Include="AWSSDK.S3" Version="*" />
 		<PackageReference Include="LinqKit" Version="*" />
 		<PackageReference Include="AvvaMobile.Core.RedisClient" Version="*" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="*" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="*" />
 		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="*" />
 		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="*" />
