@@ -22,7 +22,15 @@ namespace AvvaMobile.Core.Handlers.JwtToken
 
             SigningCredentials signingCredentials = new(securityKey, SecurityAlgorithms.HmacSha256);
 
-            token.Expiration = DateTime.UtcNow.AddYears(1);
+            if (string.IsNullOrEmpty(_configuration["Token:DaysToExpire"]))
+            {
+                token.Expiration = DateTime.UtcNow.AddDays(30);
+            }
+            else
+            {
+                token.Expiration = DateTime.UtcNow.AddDays(int.Parse(_configuration["Token:DaysToExpire"]));
+            }
+            
 
             JwtSecurityToken securityToken = new(
                 issuer: _configuration["Token:Issuer"],
