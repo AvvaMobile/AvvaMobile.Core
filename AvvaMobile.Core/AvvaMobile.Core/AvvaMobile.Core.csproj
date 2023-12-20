@@ -13,7 +13,7 @@
 		<RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
 		<RunAnalyzersDuringLiveAnalysis>False</RunAnalyzersDuringLiveAnalysis>
 		<EnableNETAnalyzers>False</EnableNETAnalyzers>
-		<Version>1.0.109</Version>
+		<Version>1.0.110</Version>
 		<PackageIcon>avvamobile.png</PackageIcon>
 		<Description>This package is build for Avva Mobile developers to make their solutions easy to develop.</Description>
 		<Copyright>Avva Mobile Enterprise Solutions</Copyright>
@@ -25,11 +25,11 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="ArrayToExcel" Version="2.2.2" />
+		<PackageReference Include="ArrayToExcel" Version="2.2.3" />
 		<PackageReference Include="AvvaMobile.Core.NetworkManager" Version="*" />
 		<PackageReference Include="AWSSDK.S3" Version="*" />
 		<PackageReference Include="LinqKit" Version="*" />
-		<PackageReference Include="AvvaMobile.Core.RedisClient" Version="1.0.9" />
+		<PackageReference Include="AvvaMobile.Core.RedisClient" Version="1.0.15" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="*" />
 		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="*" />
 		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="*" />
