@@ -20,12 +20,12 @@ namespace AvvaMobile.Core.Utilities.Mail
             _httpContext = httpContext;
         }
 
-        public async Task<EmailResult> Send(string to, string subject, string filePath, Dictionary<string, string> parameterList = null, AttachmentCollection attachments = null)
+        public async Task<EmailResult> Send(string to, string subject, string filePath, Dictionary<string, string> parameterList = null, AttachmentCollection attachments = null, string sender = null)
         {
-            return await Send(new List<string> { to }, subject, filePath, parameterList, attachments);
+            return await Send(new List<string> { to }, subject, filePath, parameterList, attachments, sender);
         }
 
-        public async Task<EmailResult> Send(List<string> toList, string subject, string filePath = null, Dictionary<string, string> parameterList = null, AttachmentCollection attachments = null)
+        public async Task<EmailResult> Send(List<string> toList, string subject, string filePath = null, Dictionary<string, string> parameterList = null, AttachmentCollection attachments = null, string sender = null)
         {
             try
             {
@@ -33,7 +33,7 @@ namespace AvvaMobile.Core.Utilities.Mail
                 var password = _appSettingsKeys.SMTP_Password;
                 var smtpServer = _appSettingsKeys.SMTP_Url;
                 var smptPort = _appSettingsKeys.SMTP_Port;
-                var smtpSender = _appSettingsKeys.SMTP_Sender;
+                var smtpSender = sender == null ? _appSettingsKeys.SMTP_Sender : sender;
                 var smtpSenderDisplayName = _appSettingsKeys.SMTP_SenderDisplayName;
 
 
