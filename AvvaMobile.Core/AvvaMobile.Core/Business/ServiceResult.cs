@@ -21,7 +21,7 @@
         
         public void SetWarning(string message)
         {
-            IsSuccess = false;
+            IsSuccess = true;
             Type = ServiceResultType.Warning;
             Message = message;
         }
