@@ -11,11 +11,15 @@ namespace AvvaMobile.Core
         {
             if (response.Message.IsNullOrEmtpy()) return;
 
-            if (response.IsSuccess)
+            if (response.Type == ServiceResultType.Success)
             {
                 Success(response.Message);
             }
-            else
+            else if (response.Type == ServiceResultType.Warning)
+            {
+                Warning(response.Message);
+            }
+            else if (response.Type == ServiceResultType.Error)
             {
                 Error(response.Message);
             }
