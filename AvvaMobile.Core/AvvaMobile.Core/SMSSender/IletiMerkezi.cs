@@ -31,6 +31,7 @@ namespace AvvaMobile.Core.SMSSender
                 NetworkManager client = new NetworkManager();
                 var httpResponse = await client.GetXMLStringAsync(url, null);
                 result.IsSuccess = httpResponse.IsSuccess;
+                result.Exception = new Exception($"{httpResponse.Exception.Message} | {httpResponse.Message}", result.Exception);
             }
             catch (Exception ex)
             {
