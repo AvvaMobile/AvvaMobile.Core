@@ -26,7 +26,7 @@ namespace AvvaMobile.Core.SMSSender
 
                 message = HttpUtility.UrlEncode(message);
 
-                var url = $"https://api.iletimerkezi.com/v1/send-sms/get/?username={username}&password={password}&text={message}&receipents={receiver}&sender={sender}";
+                var url = $"https://api.iletimerkezi.com/v1/send-sms/get/?username={username}&password={password}&text={message}&receipents={receiver}&sender={sender}&iys=0";
 
                 NetworkManager client = new NetworkManager();
                 var httpResponse = await client.GetXMLStringAsync(url, null);
