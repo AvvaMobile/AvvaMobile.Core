@@ -1,6 +1,8 @@
 ﻿using AvvaMobile.Core.Extensions;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Caching.Memory;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace AvvaMobile.Core.Caching;
 
@@ -20,7 +22,7 @@ public class MemoryCacheManager : ICacheManager
 
     public Task<T> Get<T>(string key)
     {
-        return Task.FromResult(_cache.Get<T>(key));
+        return Task.FromResult(result: _cache.Get<T>(key).Copy());
     }
 
     public Task<string> Get(string key)
@@ -42,7 +44,7 @@ public class MemoryCacheManager : ICacheManager
 
     public Task<List<SelectListItem>> Get_SelectListItems(string key)
     {
-        return Task.FromResult(_cache.Get<List<SelectListItem>>(key));
+        return Task.FromResult(_cache.Get<List<SelectListItem>>(key).Copy());
     }
 
     public Task<bool> Set_SelectListItems(string key, List<SelectListItem> value)
