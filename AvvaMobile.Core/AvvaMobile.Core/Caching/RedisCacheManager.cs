@@ -32,7 +32,7 @@ public class RedisCacheManager : ICacheManager
     {
         return value switch
         {
-            string => await _cache.Set(key, value.ToString()),
+            string s => await _cache.Set(key, s),
             int or long or decimal => await _cache.Set(key, value.ToString()),
             _ => await _cache.Set(key, JsonSerializer.Serialize(value))
         };
