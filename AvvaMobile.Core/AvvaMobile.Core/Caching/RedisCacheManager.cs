@@ -30,13 +30,12 @@ public class RedisCacheManager : ICacheManager
 
     public async Task<bool> Set(string key, object value)
     {
-        if (value is string s)
-            return await _cache.Set(key, s);
-
-        if (value is int or long or decimal)
-            return await _cache.Set(key, value.ToString());
-
-        return await _cache.Set(key, JsonSerializer.Serialize(value));
+        return value switch
+        {
+            string => await _cache.Set(key, value.ToString()),
+            int or long or decimal => await _cache.Set(key, value.ToString()),
+            _ => await _cache.Set(key, JsonSerializer.Serialize(value))
+        };
     }
 
     public async Task<bool> Set(string key, object value, TimeSpan expiry)
